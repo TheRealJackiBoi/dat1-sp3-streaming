@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="faa6f496-40a7-431b-bc4f-fbccbc43d4cf" name="Changes" comment="" />
+    <list default="true" id="c8066d4e-c942-494a-8bba-9eaf964bc1e7" name="Changes" comment="first version classUML + added movie and series img" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="CodeStyleSettingsInfer">
-    <option name="done" value="true" />
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="UML Class" />
       </list>
     </option>
   </component>
@@ -23,41 +21,88 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectCodeStyleSettingsMigration">
-    <option name="version" value="2" />
-  </component>
-  <component name="ProjectId" id="2Gz85ttXPERAIINXP5J5ju8Ksuw" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="2GzGQOXcdSVAKQbEH5iAW2dclDi" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
-    <option name="showMembers" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultPlantUmlFileTemplate": "UML Class",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/bjark/Semester 1",
-    "settings.editor.selected.configurable": "configurable.group.appearance"
+    "WebServerToolWindowFactoryState": "false",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\bjark\Semester 1\dat1-sp3-streaming" />
-    </key>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="dat1-sp3-streamingservice" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="faa6f496-40a7-431b-bc4f-fbccbc43d4cf" name="Changes" comment="" />
-      <created>1667379873248</created>
+      <changelist id="c8066d4e-c942-494a-8bba-9eaf964bc1e7" name="Changes" comment="" />
+      <created>1667383984099</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1667379873248</updated>
+      <updated>1667383984099</updated>
+      <workItem from="1667383985324" duration="6308000" />
+      <workItem from="1667397178530" duration="577000" />
+      <workItem from="1667483586682" duration="73000" />
+      <workItem from="1667483871888" duration="4788000" />
     </task>
+    <task id="LOCAL-00001" summary="initial commit">
+      <created>1667384090276</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1667384090276</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add StreamUI">
+      <created>1667396916634</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1667396916634</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add data -&gt; movies, series">
+      <created>1667397343899</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1667397343899</updated>
+    </task>
+    <task id="LOCAL-00004" summary="add data -&gt; users, savedMedia, watchedMedia">
+      <created>1667397744231</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1667397744231</updated>
+    </task>
+    <task id="LOCAL-00005" summary="first version classUML + added movie and series img">
+      <created>1667488390905</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1667488390905</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -69,5 +114,13 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="initial commit" />
+    <MESSAGE value="add StreamUI" />
+    <MESSAGE value="add data -&gt; movies, series" />
+    <MESSAGE value="add data -&gt; users, savedMedia, watchedMedia" />
+    <MESSAGE value="first version classUML + added movie and series img" />
+    <option name="LAST_COMMIT_MESSAGE" value="first version classUML + added movie and series img" />
   </component>
 </project>
