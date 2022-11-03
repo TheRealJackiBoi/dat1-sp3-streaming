@@ -3,10 +3,10 @@ import java.util.ArrayList;
 public abstract class Media {
     private final String name;
     private final int year;
-    private int rating;
+    private float rating;
     private final ArrayList<String> genre;
 
-    public Media(String name, int year, int rating, ArrayList<String> genre) {
+    public Media(String name, int year, float rating, ArrayList<String> genre) {
         this.name = name;
         this.year = year;
         this.rating = rating;
@@ -21,7 +21,7 @@ public abstract class Media {
         return year;
     }
 
-    public int getRating() {
+    public float getRating() {
         return rating;
     }
 

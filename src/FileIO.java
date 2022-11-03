@@ -37,7 +37,7 @@ public class FileIO {
 
             float rating = Float.parseFloat(values[3]);
 
-            movies.add(new Movie(name, year, genres, rating));
+            movies.add(new Movie(name, year, rating, genres));
         }
         return movies;
     }
@@ -61,7 +61,7 @@ public class FileIO {
             String[] seasonArr = values[4].split(", ");
             seasons.addAll(Arrays.asList(seasonArr));
 
-            series.add(new Serie(name, year, genres,rating, seasons));
+            series.add(new Series(name, year, rating, genres, seasons));
         }
         return series;
     }
