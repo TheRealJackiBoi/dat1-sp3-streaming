@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c8066d4e-c942-494a-8bba-9eaf964bc1e7" name="Changes" comment="add data -&gt; users, savedMedia, watchedMedia">
-      <change afterPath="$PROJECT_DIR$/Documentation/Streaming.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="c8066d4e-c942-494a-8bba-9eaf964bc1e7" name="Changes" comment="first version classUML + added movie and series img" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,7 +61,7 @@
       <workItem from="1667383985324" duration="6308000" />
       <workItem from="1667397178530" duration="577000" />
       <workItem from="1667483586682" duration="73000" />
-      <workItem from="1667483871888" duration="4434000" />
+      <workItem from="1667483871888" duration="4788000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1667384090276</created>
@@ -94,7 +91,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667397744231</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="first version classUML + added movie and series img">
+      <created>1667488390905</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1667488390905</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,6 +120,7 @@
     <MESSAGE value="add StreamUI" />
     <MESSAGE value="add data -&gt; movies, series" />
     <MESSAGE value="add data -&gt; users, savedMedia, watchedMedia" />
-    <option name="LAST_COMMIT_MESSAGE" value="add data -&gt; users, savedMedia, watchedMedia" />
+    <MESSAGE value="first version classUML + added movie and series img" />
+    <option name="LAST_COMMIT_MESSAGE" value="first version classUML + added movie and series img" />
   </component>
 </project>
