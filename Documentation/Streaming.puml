@@ -1,0 +1,94 @@
+@startuml
+
+'https://plantuml.com/class-diagram
+
+class Main{
+
+}
+
+Main <|-- Streaming
+class Streaming{
+-StreamUI ui
++void setUpStream()
++void goToMainPage()
++void playMedia()
+}
+
+StreamUI <|-- LoginPage
+class LoginPage{
++ createUser()
+
+}
+
+StreamUI <|-- MainPage
+class MainPage {
++void logout()
++void goToSearch()
++void goToSavedTitles
++void goToSeenTitles
+}
+
+StreamUI <|-- searchPage
+class searchPage{
+
++Collection<Media> searchMedia(String name, String genre, int minYear, int maxYear, float minRating, float maxRating)
+}
+
+Streaming <|-- StreamUI
+class StreamUI {
++JFrame createFrame()
++JFrame getFrame()
+-JPanel createLoginPanel()
+-JPanel createMainPanel()
+-JPanel createSearchPanel()
+-JPanel createMediaPanel()
+-JPanel createPlayingPanel()
+}
+
+Streaming <|-- Media
+Streaming <|-- Collection
+abstract class Media {
+-String final name
+-int final year
+-int rating
+-String final genre
+-String final imgPath
++toString()
+}
+
+class Movie extends Media {
+
+}
+
+class Series extends Media {
+-ArrayList<String> seasons
+}
+
+Collection *--- Media
+class Collection {
+-ArrayList<Media> medias
++void addMedia()
++ArrayList<Media> getMedias()
+}
+
+class FileIO {
++ArrayList<String> readFile()
++ArrayList<Movie> setupMovies()
++ArrayList<Series> setupSeries()
+}
+
+User <|-- Collection
+class User {
+-String name
+-String password
+-Collection hasSeen
+-Collection savedMedia
+
++void addToSavedMedia()
++void revomeFromSaved()
+
++void watchMovie()
+}
+
+
+@enduml
