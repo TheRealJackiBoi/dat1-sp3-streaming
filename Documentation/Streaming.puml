@@ -48,11 +48,11 @@ class StreamUI {
 Streaming <|-- Media
 Streaming <|-- Collection
 abstract class Media {
--String final name
--int final year
+-final String name
+-final int year
 -int rating
--String final genre
--String final imgPath
+-final ArrayList<String> genre
+-final String imgPath
 +toString()
 }
 
