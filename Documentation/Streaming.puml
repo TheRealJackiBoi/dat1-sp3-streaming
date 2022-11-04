@@ -46,7 +46,6 @@ class StreamUI {
 }
 
 Streaming <|-- Media
-Streaming <|-- Collection
 abstract class Media {
 -final String name
 -final int year
@@ -64,12 +63,6 @@ class Series extends Media {
 -ArrayList<String> seasons
 }
 
-Collection *--- Media
-class Collection {
--ArrayList<Media> medias
-+void addMedia()
-+ArrayList<Media> getMedias()
-}
 
 class FileIO {
 +ArrayList<String> readFile(File path)
@@ -77,7 +70,6 @@ class FileIO {
 +ArrayList<Series> setupSeries()
 }
 
-User <|-- Collection
 class User {
 -String name
 -String password

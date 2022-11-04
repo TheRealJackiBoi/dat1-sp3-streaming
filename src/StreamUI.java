@@ -10,6 +10,7 @@ public class StreamUI {
         }
     }
     private JFrame frame;
+    private JPanel currentPanel = null;
     private JPanel loginPanel;
     private JPanel mainPanel;
 
@@ -23,7 +24,10 @@ public class StreamUI {
 
         frame = new JFrame("Streamy");
         JPanel contentPane = new JPanel(new BorderLayout());
-        contentPane.add(createLoginPanel(), BorderLayout.CENTER);
+        if (currentPanel != null) {
+            frame.remove(currentPanel);
+        }
+        contentPane.add(currentPanel = createLoginPanel(), BorderLayout.CENTER);
         contentPane.setPreferredSize(new Dimension(800, 600));
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -101,8 +105,14 @@ public class StreamUI {
                     JOptionPane.showMessageDialog(frame, "Password incorrect");
                     return;
                 } else {
+                    //set currentuser
+                    stream.setCurrentUser(user);
                     //goto mainpanel
-                    frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
+                    if (currentPanel != null) {
+                        frame.remove(currentPanel);
+                    }
+                    frame.getContentPane().add(currentPanel = createMainPanel(), BorderLayout.CENTER);
+                    frame.revalidate();
                 }
             } else {
                 //username incorrect
@@ -127,8 +137,44 @@ public class StreamUI {
     }
 
     private JPanel createMainPanel() {
+        if(mainPanel != null)
+            return mainPanel;
 
-        return new JPanel();
+        mainPanel = new JPanel();
+        Streaming stream = Streaming.getInstance();
+
+        JPanel topPanel = new JPanel();
+        JPanel panel = new JPanel();
+
+        JLabel name = new JLabel(stream.getCurrentUser().getName());
+
+        JButton search = new JButton("Search");
+        JButton savedTitles = new JButton("Saved Titles");
+        JButton seenTitles = new JButton("Seen Titles");
+        JButton logout = new JButton("Logout");
+
+        name.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        search.setAlignmentX(Component.CENTER_ALIGNMENT);
+        savedTitles.setAlignmentX(Component.CENTER_ALIGNMENT);
+        seenTitles.setAlignmentX(Component.CENTER_ALIGNMENT);
+        logout.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
+        topPanel.add(name);
+
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(search);
+        panel.add(savedTitles);
+        panel.add(seenTitles);
+        panel.add(logout);
+
+        mainPanel.setLayout(new BorderLayout());
+
+        mainPanel.add(topPanel, BorderLayout.NORTH);
+        mainPanel.add(panel, BorderLayout.CENTER);
+
+        return mainPanel;
     }
 
 

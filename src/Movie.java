@@ -2,12 +2,14 @@ import java.util.ArrayList;
 
 public class Movie extends Media {
 
+    private final int year;
     public Movie(String name, int year, float rating, ArrayList<String> genre) {
-        super(name, year, rating, genre);
+        super(name, rating, genre);
+        this.year = year;
     }
 
     @Override
     public String toString() {
-        return "Movie{ " + super.toString() + " }";
+        return "Movie{ " + super.toString() + ", released in=" + year + " }";
     }
 }

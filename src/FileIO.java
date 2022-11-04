@@ -27,16 +27,16 @@ public class FileIO {
         ArrayList<String> data = readData(new File("data/movies.txt"));
         ArrayList<Movie> movies = new ArrayList<>();
         for (String s: data) {
-            String[] values = s.split("; ");
+            String[] values = s.split(";");
 
-            String name = values[0];
-            int year = Integer.parseInt(values[1]);
+            String name = values[0].trim();
+            int year = Integer.parseInt(values[1].trim());
 
             ArrayList<String> genres = new ArrayList<>();
-            String[] genreArr = values[2].split(", ");
+            String[] genreArr = values[2].trim().split(",");
             genres.addAll(Arrays.asList(genreArr));
 
-            float rating = Float.parseFloat(values[3]);
+            float rating = Float.parseFloat(values[3].trim().replace(",", ".").replace(";", ""));
 
             movies.add(new Movie(name, year, rating, genres));
         }
@@ -47,22 +47,26 @@ public class FileIO {
         ArrayList<String> data = readData(new File("data/series.txt"));
         ArrayList<Series> series = new ArrayList<>();
         for (String s: data){
-            String[] values = s.split("; ");
+            String[] values = s.split(";");
 
-            String name = values[0];
-            int year = Integer.parseInt(values[1]);
+            String name = values[0].trim();
+            String[] years = values[1].trim().split("-");
+            int  yearStart = Integer.parseInt(years[0].trim());
+            int yearEnd = 0;
+            if(years.length > 1)
+                yearEnd = Integer.parseInt(years[1].trim());
 
             ArrayList<String> genres = new ArrayList<>();
-            String[] genreArr = values[2].split(", ");
+            String[] genreArr = values[2].trim().split(", ");
             genres.addAll(Arrays.asList(genreArr));
 
-            float rating = Float.parseFloat(values[3]);
+            float rating = Float.parseFloat(values[3].trim().replace(",", "."));
 
             ArrayList<String> seasons = new ArrayList<>();
-            String[] seasonArr = values[4].split(", ");
+            String[] seasonArr = values[4].trim().split(", ");
             seasons.addAll(Arrays.asList(seasonArr));
 
-            series.add(new Series(name, year, rating, genres, seasons));
+            series.add(new Series(name, yearStart, yearEnd , rating, genres, seasons));
         }
         return series;
     }

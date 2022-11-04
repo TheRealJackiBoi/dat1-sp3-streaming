@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c8066d4e-c942-494a-8bba-9eaf964bc1e7" name="Changes" comment="Streamin singleton">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="c8066d4e-c942-494a-8bba-9eaf964bc1e7" name="Changes" comment="update createUserbutton actionlistener">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documentation/Streaming.puml" beforeDir="false" afterPath="$PROJECT_DIR$/Documentation/Streaming.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/movies.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/movies.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/savedMedias.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/savedMedias.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/series.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/series.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/users.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/watchedMedia.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/watchedMedia.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FileIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileIO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Media.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Media.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Movie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Series.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Series.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/StreamUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StreamUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Streaming.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Streaming.java" afterDir="false" />
+    </list>
+    <list id="1723326d-296f-4a7b-b68e-b35369ab5767" name="Changes by UrinInF4CE" comment="">
+      <change beforePath="$PROJECT_DIR$/src/FileIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileIO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +35,28 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/FileIO.java">
+      <ranges>
+        <range start1="0" end1="6" start2="0" end2="3" changelist="1723326d-296f-4a7b-b68e-b35369ab5767" />
+        <range start1="9" end1="21" start2="6" end2="11" changelist="1723326d-296f-4a7b-b68e-b35369ab5767" />
+        <range start1="22" end1="23" start2="12" end2="13" changelist="1723326d-296f-4a7b-b68e-b35369ab5767" />
+        <range start1="26" end1="27" start2="16" end2="17" changelist="1723326d-296f-4a7b-b68e-b35369ab5767" />
+        <range start1="29" end1="30" start2="19" end2="20" changelist="c8066d4e-c942-494a-8bba-9eaf964bc1e7" />
+        <range start1="31" end1="33" start2="21" end2="23" changelist="c8066d4e-c942-494a-8bba-9eaf964bc1e7" />
+        <range start1="35" end1="36" start2="25" end2="26" changelist="c8066d4e-c942-494a-8bba-9eaf964bc1e7" />
+        <range start1="38" end1="39" start2="28" end2="29" changelist="c8066d4e-c942-494a-8bba-9eaf964bc1e7" />
+        <range start1="46" end1="47" start2="36" end2="37" changelist="1723326d-296f-4a7b-b68e-b35369ab5767" />
+        <range start1="49" end1="50" start2="39" end2="40" changelist="c8066d4e-c942-494a-8bba-9eaf964bc1e7" />
+        <range start1="51" end1="53" start2="41" end2="47" changelist="c8066d4e-c942-494a-8bba-9eaf964bc1e7" />
+        <range start1="55" end1="56" start2="49" end2="50" changelist="c8066d4e-c942-494a-8bba-9eaf964bc1e7" />
+        <range start1="58" end1="59" start2="52" end2="53" changelist="c8066d4e-c942-494a-8bba-9eaf964bc1e7" />
+        <range start1="61" end1="62" start2="55" end2="56" changelist="c8066d4e-c942-494a-8bba-9eaf964bc1e7" />
+        <range start1="64" end1="65" start2="58" end2="59" changelist="c8066d4e-c942-494a-8bba-9eaf964bc1e7" />
+        <range start1="70" end1="71" start2="64" end2="65" changelist="1723326d-296f-4a7b-b68e-b35369ab5767" />
+      </ranges>
+    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -66,7 +102,7 @@
       <workItem from="1667397178530" duration="577000" />
       <workItem from="1667483586682" duration="73000" />
       <workItem from="1667483871888" duration="7641000" />
-      <workItem from="1667568921936" duration="5040000" />
+      <workItem from="1667568921936" duration="9668000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1667384090276</created>
@@ -131,7 +167,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667574954020</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="update createUserbutton actionlistener">
+      <created>1667576027270</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1667576027270</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -157,6 +200,7 @@
     <MESSAGE value="add User, implemented user.checkPassword, user.checkUsername" />
     <MESSAGE value="implement loginbutton action" />
     <MESSAGE value="Streamin singleton" />
-    <option name="LAST_COMMIT_MESSAGE" value="Streamin singleton" />
+    <MESSAGE value="update createUserbutton actionlistener" />
+    <option name="LAST_COMMIT_MESSAGE" value="update createUserbutton actionlistener" />
   </component>
 </project>

@@ -2,23 +2,17 @@ import java.util.ArrayList;
 
 public abstract class Media {
     private final String name;
-    private final int year;
     private float rating;
     private final ArrayList<String> genre;
 
-    public Media(String name, int year, float rating, ArrayList<String> genre) {
+    public Media(String name, float rating, ArrayList<String> genre) {
         this.name = name;
-        this.year = year;
         this.rating = rating;
         this.genre = genre;
     }
 
     public String getName() {
         return name;
-    }
-
-    public int getYear() {
-        return year;
     }
 
     public float getRating() {
@@ -36,7 +30,6 @@ public abstract class Media {
     @Override
     public String toString() {
         return  "name='" + name + '\'' +
-                ", year=" + year +
                 ", rating=" + rating +
                 ", genre=" + genre;
     }

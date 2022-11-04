@@ -2,15 +2,19 @@ import java.util.ArrayList;
 
 public class Series extends Media {
     private final ArrayList<String> seasons;
+    private final int yearStart;
+    private final int yearEnd;
 
 
-    public Series(String name, int year, float rating, ArrayList<String> genre, ArrayList<String> seasons) {
-        super(name, year, rating, genre);
+    public Series(String name, int yearStart, int yearEnd, float rating, ArrayList<String> genre, ArrayList<String> seasons) {
+        super(name, rating, genre);
         this.seasons = seasons;
+        this.yearStart = yearStart;
+        this.yearEnd = yearEnd;
     }
 
     @Override
     public String toString() {
-        return "Series{ " + super.toString() + ", seasons=" + seasons + " }";
+        return "Series{ " + super.toString() + ", starts in=" + yearStart + ", ends in=" + yearEnd + ", seasons=" + seasons + " }";
     }
 }
