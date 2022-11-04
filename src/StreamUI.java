@@ -85,7 +85,7 @@ public class StreamUI {
             String username = userText.getText();
             String password = String.valueOf(passwordText.getPassword());
 
-            Streaming stream = new Streaming();
+            Streaming stream = Streaming.getInstance();
 
             if(stream.checkUserName(username)) {
                 User user = stream.checkUserPW(username, password);
