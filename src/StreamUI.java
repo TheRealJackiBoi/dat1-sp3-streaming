@@ -11,6 +11,7 @@ public class StreamUI {
     }
     private JFrame frame;
     private JPanel loginPanel;
+    private JPanel mainPanel;
 
 
 
@@ -71,12 +72,36 @@ public class StreamUI {
         userLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         passwordLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        //workinprogress
+        //createuserbutton action
         bCreate.addActionListener(e -> {
+            String username = userText.getText();
+            String password = String.valueOf(passwordText.getPassword());
+
 
         });
-
+        //loginbutton action
         bLogin.addActionListener(e -> {
+            String username = userText.getText();
+            String password = String.valueOf(passwordText.getPassword());
 
+            Streaming stream = new Streaming();
+
+            if(stream.checkUserName(username)) {
+                User user = stream.checkUserPW(username, password);
+
+                if (user == null) {
+                    //popup
+                    JOptionPane.showMessageDialog(frame, "Password incorrect");
+                    return;
+                } else {
+                    //goto mainpanel
+                    frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
+                }
+            } else {
+                //username incorrect
+                JOptionPane.showMessageDialog(frame, "Username incorrect");
+            }
         });
 
         buttonPanel.add(bCreate);
@@ -95,6 +120,10 @@ public class StreamUI {
         return loginPanel;
     }
 
+    private JPanel createMainPanel() {
+
+        return new JPanel();
+    }
 
 
 }

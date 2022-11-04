@@ -15,10 +15,7 @@ public class Streaming {
                 break;
             }
         }
-        if (user == null) {
-            return false;
-        }
-        return true;
+        return user != null;
     }
 
     public User checkUserPW(String un, String pw) {
