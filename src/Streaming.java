@@ -1,7 +1,17 @@
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 public class Streaming {
+    private static Streaming stream = null;
 
+    public synchronized static Streaming getInstance() {
+        if (stream == null) {
+            stream = new Streaming();
+        }
+        return stream;
+    }
+
+    private Streaming() {}
     private ArrayList<User> users;
     private User currentUser;
     private ArrayList<Movie> movies;
@@ -17,10 +27,7 @@ public class Streaming {
                 break;
             }
         }
-        if (user == null) {
-            return false;
-        }
-        return true;
+        return user != null;
     }
 
     public User checkUserPW(String un, String pw) {
