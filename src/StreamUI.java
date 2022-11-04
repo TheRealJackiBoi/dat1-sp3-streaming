@@ -67,6 +67,10 @@ public class StreamUI {
         JButton bLogin = new JButton("Login");
         JButton bCreate = new JButton("Create User");
 
+        loginLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        userLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        passwordLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         bCreate.addActionListener(e -> {
 
         });
