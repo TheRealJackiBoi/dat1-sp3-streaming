@@ -1,12 +1,13 @@
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class User {
     private String name;
     private String password;
-    private final Collection<Media> hasSeen;
-    private final Collection<Media> savedMedia;
+    private final ArrayList<Media> hasSeen;
+    private final ArrayList<Media> savedMedia;
 
-    public User(String name, String password, Collection<Media> hasSeen, Collection<Media> savedMedia) {
+    public User(String name, String password, ArrayList<Media> hasSeen, ArrayList<Media> savedMedia) {
         this.name = name;
         this.password = password;
         this.hasSeen = hasSeen;
@@ -41,11 +42,11 @@ public class User {
         this.password = password;
     }
 
-    public Collection<Media> getHasSeen() {
+    public ArrayList<Media> getHasSeen() {
         return hasSeen;
     }
 
-    public Collection<Media> getSavedMedia() {
+    public ArrayList<Media> getSavedMedia() {
         return savedMedia;
     }
 }

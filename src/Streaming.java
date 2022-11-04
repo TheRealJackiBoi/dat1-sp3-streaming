@@ -4,6 +4,8 @@ public class Streaming {
 
     private ArrayList<User> users;
     private User currentUser;
+    private ArrayList<Movie> movies;
+    private ArrayList<Series> series;
 
     public boolean checkUserName(String un) {
         User user = null;
@@ -40,6 +42,14 @@ public class Streaming {
         } else {
             return null;
         }
+    }
+
+    public void setUpStream(){
+
+        users = FileIO.setUpUser();
+        movies = FileIO.setupMovies();
+        series = FileIO.setupSeries();
+
     }
 
 }

@@ -2,11 +2,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Scanner;
 
 public class FileIO {
 
-    public ArrayList<String> readData(File path){
+    public static ArrayList<String> readData(File path){
         File file = path;
         ArrayList<String> media = new ArrayList<>();
         try {
@@ -22,7 +23,7 @@ public class FileIO {
         return media;
     }
 
-    public ArrayList<Movie> setupMovies(){
+    public static ArrayList<Movie> setupMovies(){
         ArrayList<String> data = readData(new File("data/movies.txt"));
         ArrayList<Movie> movies = new ArrayList<>();
         for (String s: data) {
@@ -42,7 +43,7 @@ public class FileIO {
         return movies;
     }
 
-    public ArrayList<Series> setupSeries(){
+    public static ArrayList<Series> setupSeries(){
         ArrayList<String> data = readData(new File("data/series.txt"));
         ArrayList<Series> series = new ArrayList<>();
         for (String s: data){
@@ -65,5 +66,24 @@ public class FileIO {
         }
         return series;
     }
+
+    public static ArrayList<User> setUpUser(){
+        ArrayList<String> data = readData(new File("data/users.txt"));
+        ArrayList<User> userData = new ArrayList<>();
+            for (String u: data) {
+                String[] userLogin = u.split("; ");
+
+                String userName = userLogin[0];
+                String userPassword = userLogin[1];
+
+                ArrayList<Media> userHasSeen = new ArrayList<>();
+                ArrayList<Media> userSaved = new ArrayList<>();
+
+                userData.add(new User(userName, userPassword, userHasSeen, userSaved));
+            }
+        return userData;
+    }
+
+
 
 }
