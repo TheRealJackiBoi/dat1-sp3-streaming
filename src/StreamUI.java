@@ -77,6 +77,12 @@ public class StreamUI {
         bCreate.addActionListener(e -> {
             String username = userText.getText();
             String password = String.valueOf(passwordText.getPassword());
+            Streaming stream = Streaming.getInstance();
+
+            if (stream.checkUserName(username)) {
+                JOptionPane.showMessageDialog(frame,"User already exists");
+                return;
+            }
 
 
         });
