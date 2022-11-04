@@ -1,30 +1,20 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class FileIO {
 
-    public static ArrayList<String> readData(File path){
-        File file = path;
-        ArrayList<String> media = new ArrayList<>();
-        try {
-            Scanner input = new Scanner(file);
-            input.nextLine();
-
-            while(input.hasNextLine());{
-                media.add(input.nextLine());
-            }
-        } catch (FileNotFoundException e){
-            media = null;
+    public static List<String> readData(File file){
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            return reader.lines().collect(Collectors.toList());
+        } catch (IOException e){
+            System.err.println(e);
         }
-        return media;
+        return Collections.emptyList();
     }
 
     public static ArrayList<Movie> setupMovies(){
-        ArrayList<String> data = readData(new File("data/movies.txt"));
+        List<String> data = readData(new File("data/movies.txt"));
         ArrayList<Movie> movies = new ArrayList<>();
         for (String s: data) {
             String[] values = s.split(";");
@@ -44,7 +34,7 @@ public class FileIO {
     }
 
     public static ArrayList<Series> setupSeries(){
-        ArrayList<String> data = readData(new File("data/series.txt"));
+        List<String> data = readData(new File("data/series.txt"));
         ArrayList<Series> series = new ArrayList<>();
         for (String s: data){
             String[] values = s.split(";");
@@ -72,7 +62,7 @@ public class FileIO {
     }
 
     public static ArrayList<User> setUpUser(){
-        ArrayList<String> data = readData(new File("data/users.txt"));
+        List<String> data = readData(new File("data/users.txt"));
         ArrayList<User> userData = new ArrayList<>();
             for (String u: data) {
                 String[] userLogin = u.split("; ");
