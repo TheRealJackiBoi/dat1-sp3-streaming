@@ -71,7 +71,7 @@ public class FileIO {
                 String userPassword = userLogin[1];
 
                 ArrayList<Media> userHasSeen = new ArrayList<>();
-                ArrayList<Media> userSaved = new ArrayList<>();
+                ArrayList<Media> userSaved = new ArrayList<>(Arrays.asList(new Movie("Indiana Jones", 2020, 8.7f, new ArrayList<>(Arrays.asList("Horro"))), new Movie("Star Wars", 2020, 8.7f, new ArrayList<>(Arrays.asList("Horror")))));
 
                 userData.add(new User(userName, userPassword, userHasSeen, userSaved));
             }

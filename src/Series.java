@@ -13,8 +13,4 @@ public class Series extends Media {
         this.yearEnd = yearEnd;
     }
 
-    @Override
-    public String toString() {
-        return "Series{ " + super.toString() + ", starts in=" + yearStart + ", ends in=" + yearEnd + ", seasons=" + seasons + " }";
-    }
 }

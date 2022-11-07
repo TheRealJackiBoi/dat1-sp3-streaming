@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 
+import static java.awt.BorderLayout.*;
+import static java.awt.BorderLayout.CENTER;
+
 public class StreamUI {
     static {
         try {
@@ -14,6 +17,7 @@ public class StreamUI {
     private JPanel loginPanel;
     private JPanel mainPanel;
 
+    private JPanel savedTitlesPanel;
 
 
     public JFrame createFrame() {
@@ -27,7 +31,7 @@ public class StreamUI {
         if (currentPanel != null) {
             frame.remove(currentPanel);
         }
-        contentPane.add(currentPanel = createLoginPanel(), BorderLayout.CENTER);
+        contentPane.add(currentPanel = createLoginPanel(), CENTER);
         contentPane.setPreferredSize(new Dimension(800, 600));
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -108,11 +112,7 @@ public class StreamUI {
                     //set currentuser
                     stream.setCurrentUser(user);
                     //goto mainpanel
-                    if (currentPanel != null) {
-                        frame.remove(currentPanel);
-                    }
-                    frame.getContentPane().add(currentPanel = createMainPanel(), BorderLayout.CENTER);
-                    frame.revalidate();
+                    swapPanel(createMainPanel());
                 }
             } else {
                 //username incorrect
@@ -131,7 +131,7 @@ public class StreamUI {
         panel.add(passwordText);
         panel.add(buttonPanel);
 
-        loginPanel.add(panel, BorderLayout.CENTER);
+        loginPanel.add(panel, CENTER);
 
         return loginPanel;
     }
@@ -143,7 +143,7 @@ public class StreamUI {
         mainPanel = new JPanel();
         Streaming stream = Streaming.getInstance();
 
-        JPanel topPanel = new JPanel();
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JPanel panel = new JPanel();
 
         JLabel name = new JLabel(stream.getCurrentUser().getName());
@@ -153,14 +153,22 @@ public class StreamUI {
         JButton seenTitles = new JButton("Seen Titles");
         JButton logout = new JButton("Logout");
 
-        name.setAlignmentX(Component.LEFT_ALIGNMENT);
+        savedTitles.addActionListener(e -> {
+
+            if (stream.getCurrentUser().getSavedMedia().isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "You have no saved titles, save some first");
+                return;
+            }
+
+            //goto savedTitlesPane
+            swapPanel(createSavedTitlesPane());
+        });
 
         search.setAlignmentX(Component.CENTER_ALIGNMENT);
         savedTitles.setAlignmentX(Component.CENTER_ALIGNMENT);
         seenTitles.setAlignmentX(Component.CENTER_ALIGNMENT);
         logout.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
         topPanel.add(name);
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -171,11 +179,96 @@ public class StreamUI {
 
         mainPanel.setLayout(new BorderLayout());
 
-        mainPanel.add(topPanel, BorderLayout.NORTH);
-        mainPanel.add(panel, BorderLayout.CENTER);
+        mainPanel.add(topPanel, NORTH);
+        mainPanel.add(panel, CENTER);
 
         return mainPanel;
     }
 
+    private JPanel createSavedTitlesPane() {
+        if(savedTitlesPanel != null)
+            return savedTitlesPanel;
+
+        savedTitlesPanel = new JPanel();
+        Streaming stream = Streaming.getInstance();
+
+        JPanel panel = new JPanel(new BorderLayout());
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel contPanel = new JPanel();
+
+        JButton bGoToMain = new JButton("Menu");
+
+        JLabel header = new JLabel("Saved Titles");
+
+        JList<Media> list = new JList<>(stream.getCurrentUser().getSavedMedia().toArray(new Media[0]));
+
+        JPanel bPanel = new JPanel(new GridLayout(1, 2));
+
+        JButton bPlay = new JButton("Play");
+        JButton bDelete = new JButton("Delete");
+
+
+        JScrollPane titlesSPanel = new JScrollPane(list);
+
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        list.addListSelectionListener(e -> {
+            boolean b = e.getFirstIndex() != -1;
+            bPlay.setEnabled(b);
+            bDelete.setEnabled(b);
+        });
+
+        //gotomain add going to main menu panel
+        bGoToMain.addActionListener(e -> {
+            //goto mainpanel
+            swapPanel(createMainPanel());
+        });
+
+
+        bPlay.addActionListener(e -> {
+
+            //goto playPanel
+            swapPanel(createPlayPanel(list.getSelectedValue()));
+        });
+
+        //TODO: Create delete from savedlist
+        //delete media from savedList
+        bDelete.addActionListener(e -> {
+
+        });
+
+        bPlay.setEnabled(false);
+        bDelete.setEnabled(false);
+
+
+
+        contPanel.setLayout(new BorderLayout());
+
+        bPanel.add(bPlay);
+        bPanel.add(bDelete);
+        topPanel.add(bGoToMain);
+        contPanel.add(header, NORTH);
+        contPanel.add(titlesSPanel, CENTER);
+        contPanel.add(bPanel, SOUTH);
+        panel.add(topPanel, NORTH);
+        panel.add(contPanel, CENTER);
+
+        savedTitlesPanel.add(panel, CENTER);
+
+        return savedTitlesPanel;
+    }
+
+    private JPanel createPlayPanel(Media media) {
+        return new JPanel();
+    }
+
+    private void swapPanel(JPanel panel) {
+        if (currentPanel != null) {
+            frame.remove(currentPanel);
+        }
+        frame.getContentPane().add(currentPanel = panel, CENTER);
+        frame.revalidate();
+        frame.repaint();
+    }
 
 }

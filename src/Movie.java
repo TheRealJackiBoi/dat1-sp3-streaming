@@ -8,8 +8,5 @@ public class Movie extends Media {
         this.year = year;
     }
 
-    @Override
-    public String toString() {
-        return "Movie{ " + super.toString() + ", released in=" + year + " }";
-    }
+
 }
