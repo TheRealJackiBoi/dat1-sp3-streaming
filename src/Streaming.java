@@ -66,4 +66,12 @@ public class Streaming {
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
     }
+
+    public ArrayList<Movie> getMovies() {
+        return movies;
+    }
+
+    public ArrayList<Series> getSeries() {
+        return series;
+    }
 }

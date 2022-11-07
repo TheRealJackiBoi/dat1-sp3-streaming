@@ -29,8 +29,6 @@ public abstract class Media {
 
     @Override
     public String toString() {
-        return  "name='" + name + '\'' +
-                ", rating=" + rating +
-                ", genre=" + genre;
+        return name;
     }
 }
