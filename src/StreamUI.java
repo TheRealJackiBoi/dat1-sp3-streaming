@@ -61,6 +61,8 @@ public class StreamUI {
 
         JPanel panel = new JPanel();
 
+        JLabel welcomeText = new JLabel("Welcome to Streamy");
+
         JLabel loginLabel = new JLabel("Login");
 
         //User input
@@ -79,6 +81,7 @@ public class StreamUI {
         loginLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         userLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         passwordLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        welcomeText.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         //workinprogress
         //createuserbutton action
@@ -124,6 +127,7 @@ public class StreamUI {
         buttonPanel.add(bLogin);
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(welcomeText);
         panel.add(loginLabel);
         panel.add(userLabel);
         panel.add(userText);
@@ -162,6 +166,15 @@ public class StreamUI {
 
             //goto savedTitlesPane
             swapPanel(createSavedTitlesPane());
+        });
+
+        logout.addActionListener(e -> {
+
+            int a = JOptionPane.showConfirmDialog(frame, "Confirm you want to logout");
+            if (a== JOptionPane.YES_OPTION) {
+                stream.setCurrentUser(null);
+                swapPanel(createLoginPanel());
+            }
         });
 
         search.setAlignmentX(Component.CENTER_ALIGNMENT);
