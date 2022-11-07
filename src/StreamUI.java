@@ -15,7 +15,6 @@ public class StreamUI {
     private JPanel mainPanel;
 
 
-
     public JFrame createFrame() {
 
         if (frame != null)
@@ -23,7 +22,7 @@ public class StreamUI {
 
 
         frame = new JFrame("Streamy");
-        JPanel contentPane = new JPanel(new BorderLayout());
+        JPanel contentPane = new JPanel();
         if (currentPanel != null) {
             frame.remove(currentPanel);
         }
@@ -53,7 +52,9 @@ public class StreamUI {
         if(loginPanel != null)
             return loginPanel;
 
-        loginPanel = new JPanel();
+        loginPanel = new JPanel(new BorderLayout());
+
+        JLabel welcomeText = new JLabel("Welcome to Streamy");
 
         JPanel panel = new JPanel();
 
@@ -75,6 +76,7 @@ public class StreamUI {
         loginLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         userLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         passwordLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        welcomeText.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         //workinprogress
         //createuserbutton action
@@ -113,6 +115,7 @@ public class StreamUI {
                     }
                     frame.getContentPane().add(currentPanel = createMainPanel(), BorderLayout.CENTER);
                     frame.revalidate();
+                    frame.repaint();
                 }
             } else {
                 //username incorrect
@@ -124,6 +127,7 @@ public class StreamUI {
         buttonPanel.add(bLogin);
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(welcomeText);
         panel.add(loginLabel);
         panel.add(userLabel);
         panel.add(userText);
@@ -131,7 +135,11 @@ public class StreamUI {
         panel.add(passwordText);
         panel.add(buttonPanel);
 
+
+
+        //Adding the greetings text to the login panel, showing at the wrong place at the moment
         loginPanel.add(panel, BorderLayout.CENTER);
+
 
         return loginPanel;
     }
@@ -160,6 +168,25 @@ public class StreamUI {
         seenTitles.setAlignmentX(Component.CENTER_ALIGNMENT);
         logout.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        search.addActionListener(e -> {
+
+        });
+
+
+        logout.addActionListener(e -> {
+
+            int a = JOptionPane.showConfirmDialog(frame, "Confirm you want to logout");
+            if (a== JOptionPane.YES_OPTION) {
+                stream.setCurrentUser(null);
+                if(currentPanel != null) {
+                    frame.remove(currentPanel);
+                }
+                frame.getContentPane().add(currentPanel = createLoginPanel(), BorderLayout.CENTER);
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
         topPanel.add(name);
 
@@ -176,6 +203,5 @@ public class StreamUI {
 
         return mainPanel;
     }
-
 
 }
