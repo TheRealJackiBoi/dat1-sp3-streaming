@@ -18,6 +18,7 @@ public class StreamUI {
     private JPanel mainPanel;
 
     private JPanel savedTitlesPanel;
+    private JPanel hasWatchPanel;
 
 
     public JFrame createFrame() {
@@ -168,6 +169,15 @@ public class StreamUI {
             swapPanel(createSavedTitlesPane());
         });
 
+        seenTitles.addActionListener(e -> {
+            if (stream.getCurrentUser().getHasSeen().isEmpty()){
+                JOptionPane.showMessageDialog(frame, "You have not seen any titels yet");
+                return;
+            }
+
+            swapPanel(createHasWatch());
+        });
+
         logout.addActionListener(e -> {
 
             int a = JOptionPane.showConfirmDialog(frame, "Confirm you want to logout");
@@ -254,7 +264,6 @@ public class StreamUI {
         bDelete.setEnabled(false);
 
 
-
         contPanel.setLayout(new BorderLayout());
 
         bPanel.add(bPlay);
@@ -269,6 +278,68 @@ public class StreamUI {
         savedTitlesPanel.add(panel, CENTER);
 
         return savedTitlesPanel;
+    }
+
+    private JPanel createHasWatch(){
+        if(hasWatchPanel != null)
+            return hasWatchPanel;
+
+        hasWatchPanel = new JPanel();
+        Streaming stream = Streaming.getInstance();
+
+        JPanel panel = new JPanel(new BorderLayout());
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel contPanel = new JPanel();
+
+        JButton bGoToMain = new JButton("Menu");
+
+        JLabel header = new JLabel("Saved Titles");
+
+        JList<Media> list = new JList<>(stream.getCurrentUser().getHasSeen().toArray(new Media[0]));
+
+        JPanel bPanel = new JPanel(new GridLayout(1, 2));
+
+        JButton bPlay = new JButton("Play");
+
+        JScrollPane titlesSPanel = new JScrollPane(list);
+
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        list.addListSelectionListener(e -> {
+            boolean b = e.getFirstIndex() != -1;
+            bPlay.setEnabled(b);
+
+        });
+
+        //gotomain add going to main menu panel
+        bGoToMain.addActionListener(e -> {
+            //goto mainpanel
+            swapPanel(createMainPanel());
+        });
+
+        bPlay.addActionListener(e -> {
+
+            //goto playPanel
+            swapPanel(createPlayPanel(list.getSelectedValue()));
+        });
+
+        bPlay.setEnabled(false);
+
+
+        contPanel.setLayout(new BorderLayout());
+
+        bPanel.add(bPlay);
+        topPanel.add(bGoToMain);
+        contPanel.add(header, NORTH);
+        contPanel.add(titlesSPanel, CENTER);
+        contPanel.add(bPanel, SOUTH);
+        panel.add(topPanel, NORTH);
+        panel.add(contPanel, CENTER);
+
+        savedTitlesPanel.add(panel, CENTER);
+
+        return hasWatchPanel;
+
     }
 
     private JPanel createPlayPanel(Media media) {
