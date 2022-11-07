@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="faa6f496-40a7-431b-bc4f-fbccbc43d4cf" name="Changes" comment="add logoutbutton">
+    <list default="true" id="faa6f496-40a7-431b-bc4f-fbccbc43d4cf" name="Changes" comment="add createhaswatch Jpanel">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/StreamUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StreamUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Streaming.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Streaming.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +87,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667827103237</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add createhaswatch Jpanel">
+      <created>1667828031486</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1667828031486</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -107,6 +115,7 @@
     <MESSAGE value="Add logout button" />
     <MESSAGE value="update workspace" />
     <MESSAGE value="add logoutbutton" />
-    <option name="LAST_COMMIT_MESSAGE" value="add logoutbutton" />
+    <MESSAGE value="add createhaswatch Jpanel" />
+    <option name="LAST_COMMIT_MESSAGE" value="add createhaswatch Jpanel" />
   </component>
 </project>

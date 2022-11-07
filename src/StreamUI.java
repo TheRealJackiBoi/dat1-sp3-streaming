@@ -1,5 +1,12 @@
+import javax.imageio.ImageIO;
+import javax.sound.midi.Soundbank;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static java.awt.BorderLayout.*;
 import static java.awt.BorderLayout.CENTER;
@@ -19,6 +26,7 @@ public class StreamUI {
 
     private JPanel savedTitlesPanel;
     private JPanel hasWatchPanel;
+    private JPanel playPanel;
 
 
     public JFrame createFrame() {
@@ -249,7 +257,7 @@ public class StreamUI {
 
 
         bPlay.addActionListener(e -> {
-
+            stream.setCurrentMedia(list.getSelectedValue());
             //goto playPanel
             swapPanel(createPlayPanel(list.getSelectedValue()));
         });
@@ -318,7 +326,7 @@ public class StreamUI {
         });
 
         bPlay.addActionListener(e -> {
-
+            stream.setCurrentMedia(list.getSelectedValue());
             //goto playPanel
             swapPanel(createPlayPanel(list.getSelectedValue()));
         });
@@ -342,8 +350,55 @@ public class StreamUI {
 
     }
 
-    private JPanel createPlayPanel(Media media) {
-        return new JPanel();
+    private JPanel createPlayPanel(Media streaming) {
+        if(playPanel != null)
+            return playPanel;
+
+        playPanel = new JPanel(new BorderLayout());
+
+        Streaming stream = Streaming.getInstance();
+
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        JButton bToMainMenu = new JButton("Main Menu");
+
+        BufferedImage imageMedia;
+        JLabel imageLabel = new JLabel();
+
+        //get mediaName
+        JLabel mediaCurrentPlaying = new JLabel(stream.getCurrentMedia() + " is playing");
+
+        bToMainMenu.addActionListener(e -> {
+            swapPanel(createMainPanel());
+        });
+
+        try{
+            Media media = stream.getCurrentMedia();
+
+            if (media instanceof Series) {
+                String imageName = "data/seriesImages/" + media.getName() +".jpg";
+                imageLabel = new JLabel(new ImageIcon(imageName));
+            } else if (media instanceof Movie) {
+                String imageName = "data/moviesImages/" + media.getName() + ".jpg";
+                imageLabel = new JLabel(new ImageIcon(imageName));
+            }
+        } catch (Exception e){
+            System.out.println(e);
+        }
+
+        topPanel.add(bToMainMenu);
+        mediaCurrentPlaying.setHorizontalAlignment(JLabel.CENTER);
+        {
+            Font font = mediaCurrentPlaying.getFont();
+            font = font.deriveFont(font.getSize2D()*2);
+            mediaCurrentPlaying.setFont(font);
+        }
+
+        playPanel.add(mediaCurrentPlaying, SOUTH);
+        playPanel.add(imageLabel, CENTER);
+        playPanel.add(topPanel, NORTH);
+
+        return playPanel;
     }
 
     private void swapPanel(JPanel panel) {
