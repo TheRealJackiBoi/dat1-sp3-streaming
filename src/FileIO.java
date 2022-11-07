@@ -75,7 +75,7 @@ public class FileIO {
 
                 boolean userHasSeenExist = false;
                 ArrayList<Media> userHasSeen = new ArrayList<>();
-                for (Playlist p : savedMediaData) {
+                for (Playlist p : hasSeenPlaylists) {
                     if (p.ownerName.equals(userName)) {
                         userHasSeenExist = true;
                         userHasSeen = p.medias;

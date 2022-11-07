@@ -336,7 +336,7 @@ public class StreamUI {
         panel.add(topPanel, NORTH);
         panel.add(contPanel, CENTER);
 
-        savedTitlesPanel.add(panel, CENTER);
+        hasWatchPanel.add(panel, CENTER);
 
         return hasWatchPanel;
 
