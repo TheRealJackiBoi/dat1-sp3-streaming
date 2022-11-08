@@ -94,4 +94,27 @@ public class Streaming {
     public ArrayList<Playlist> getHasSeenPlaylists() {
         return hasSeenPlaylists;
     }
+
+    public ArrayList<Movie> getMovies() {
+        return movies;
+    }
+
+    public ArrayList<Series> getSeries() {
+        return series;
+    }
+    public Media getCurrentMedia() {
+        return currentMedia;
+    }
+
+    public void setCurrentMedia(Media currentMedia) {
+        this.currentMedia = currentMedia;
+    }
+
+    public ArrayList<Playlist> getSavedPlaylists() {
+        return savedPlaylists;
+    }
+
+    public ArrayList<Playlist> getHasSeenPlaylists() {
+        return hasSeenPlaylists;
+    }
 }
