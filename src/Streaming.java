@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
@@ -15,6 +16,8 @@ public class Streaming {
     private ArrayList<User> users;
     private User currentUser;
     private Media currentMedia;
+    private ArrayList<Playlist> savedPlaylists;
+    private ArrayList<Playlist> hasSeenPlaylists;
     private ArrayList<Movie> movies;
     private ArrayList<Series> series;
 
@@ -54,10 +57,11 @@ public class Streaming {
 
     public void setUpStream(){
 
-        users = FileIO.setUpUser();
         movies = FileIO.setupMovies();
         series = FileIO.setupSeries();
-
+        savedPlaylists = FileIO.setupPlaylist(new File("data/savedMedias.txt"));
+        hasSeenPlaylists = FileIO.setupPlaylist(new File("data/watchedMedia.txt"));
+        users = FileIO.setUpUser();
     }
 
     public User getCurrentUser() {
@@ -75,12 +79,18 @@ public class Streaming {
     public ArrayList<Series> getSeries() {
         return series;
     }
-
     public Media getCurrentMedia() {
         return currentMedia;
     }
 
     public void setCurrentMedia(Media currentMedia) {
         this.currentMedia = currentMedia;
+
+    public ArrayList<Playlist> getSavedPlaylists() {
+        return savedPlaylists;
+    }
+
+    public ArrayList<Playlist> getHasSeenPlaylists() {
+        return hasSeenPlaylists;
     }
 }

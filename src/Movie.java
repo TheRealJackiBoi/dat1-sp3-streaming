@@ -8,5 +8,7 @@ public class Movie extends Media {
         this.year = year;
     }
 
-
+    public int getYear() {
+        return year;
+    }
 }
