@@ -21,16 +21,38 @@ public class User {
         this.savedMedia = new ArrayList<>();
     }
 
-    public void addToSavedMedia(Media media) {
+    public boolean addToSaved(Media media) {
 
+        int index = savedMedia.indexOf(media);
+
+        if(index != -1)
+            return false;
+
+        savedMedia.add(media);
+        FileIO.updateSavedPlaylists();
+        return true;
     }
 
-    public void removeFromSaved(Media media) {
+    public boolean removeFromSaved(Media media) {
 
+        int index = savedMedia.indexOf(media);
+
+        if(index == -1)
+            return false;
+
+        savedMedia.remove(media);
+        FileIO.updateSavedPlaylists();
+        return true;
     }
 
     public void watchMovie(Media media) {
+        int index = hasSeen.indexOf(media);
 
+        if(index != -1)
+            return;
+
+        hasSeen.add(media);
+        FileIO.updateHasSeenPlaylists();
     }
 
     public String getName() {
@@ -56,4 +78,5 @@ public class User {
     public ArrayList<Media> getSavedMedia() {
         return savedMedia;
     }
+
 }

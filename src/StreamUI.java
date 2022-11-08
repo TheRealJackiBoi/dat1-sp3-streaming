@@ -187,6 +187,7 @@ public class StreamUI {
             }
 
             //goto savedTitlesPane
+            savedTitlesPanel = null;
             swapPanel(createSavedTitlesPane());
         });
 
@@ -196,6 +197,7 @@ public class StreamUI {
                 return;
             }
 
+            hasWatchPanel = null;
             swapPanel(createHasWatch());
         });
 
@@ -380,6 +382,8 @@ public class StreamUI {
 
         Streaming stream = Streaming.getInstance();
 
+        stream.getCurrentUser().watchMovie(streaming);
+
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         JButton bToMainMenu = new JButton("Main Menu");
@@ -489,6 +493,7 @@ public class StreamUI {
                 JPanel bPanel = new JPanel(new GridLayout(1, 2));
 
                 JButton bPlay = new JButton("Play");
+                JButton bSave = new JButton("Save");
 
                 JScrollPane titlesSPanel = new JScrollPane(list);
                 titlesSPanel.setPreferredSize(new Dimension(300,500));
@@ -498,6 +503,7 @@ public class StreamUI {
                 list.addListSelectionListener(e -> {
                     boolean b = e.getFirstIndex() != -1;
                     bPlay.setEnabled(b);
+                    bSave.setEnabled(b);
 
                 });
 
@@ -513,12 +519,25 @@ public class StreamUI {
                     swapPanel(createPlayPanel(list.getSelectedValue()));
                 });
 
+                bSave.addActionListener(e -> {
+                    Media m = list.getSelectedValue();
+                    boolean b = stream.getCurrentUser().addToSaved(m);
+
+                    if (!b) {
+                        JOptionPane.showMessageDialog(frame, "Media is already saved");
+                    } else {
+                        JOptionPane.showMessageDialog(frame, m + " is saved");
+                    }
+                });
+
                 bPlay.setEnabled(false);
+                bSave.setEnabled(false);
 
 
                 contPanel.setLayout(new BorderLayout());
 
                 bPanel.add(bPlay);
+                bPanel.add(bSave);
                 topPanel.add(bGoToMain);
                 contPanel.add(allMovies, NORTH);
                 contPanel.add(titlesSPanel, CENTER);
