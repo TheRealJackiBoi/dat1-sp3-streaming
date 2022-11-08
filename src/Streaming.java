@@ -85,6 +85,7 @@ public class Streaming {
 
     public void setCurrentMedia(Media currentMedia) {
         this.currentMedia = currentMedia;
+    }
 
     public ArrayList<Playlist> getSavedPlaylists() {
         return savedPlaylists;

@@ -351,8 +351,6 @@ public class StreamUI {
     }
 
     private JPanel createPlayPanel(Media streaming) {
-        if(playPanel != null)
-            return playPanel;
 
         playPanel = new JPanel(new BorderLayout());
 
@@ -369,6 +367,7 @@ public class StreamUI {
         JLabel mediaCurrentPlaying = new JLabel(stream.getCurrentMedia() + " is playing");
 
         bToMainMenu.addActionListener(e -> {
+            stream.setCurrentMedia(null);
             swapPanel(createMainPanel());
         });
 
