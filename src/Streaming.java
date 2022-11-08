@@ -95,26 +95,11 @@ public class Streaming {
         return hasSeenPlaylists;
     }
 
-    public ArrayList<Movie> getMovies() {
-        return movies;
+    public ArrayList<User> getUsers() {
+        return users;
     }
 
-    public ArrayList<Series> getSeries() {
-        return series;
-    }
-    public Media getCurrentMedia() {
-        return currentMedia;
-    }
-
-    public void setCurrentMedia(Media currentMedia) {
-        this.currentMedia = currentMedia;
-    }
-
-    public ArrayList<Playlist> getSavedPlaylists() {
-        return savedPlaylists;
-    }
-
-    public ArrayList<Playlist> getHasSeenPlaylists() {
-        return hasSeenPlaylists;
+    public void addUser(User u) {
+        users.add(u);
     }
 }
