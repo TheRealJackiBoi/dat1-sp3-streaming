@@ -15,6 +15,7 @@ public class Streaming {
     private Streaming() {}
     private ArrayList<User> users;
     private User currentUser;
+    private Media currentMedia;
     private ArrayList<Playlist> savedPlaylists;
     private ArrayList<Playlist> hasSeenPlaylists;
     private ArrayList<Movie> movies;
@@ -78,6 +79,12 @@ public class Streaming {
     public ArrayList<Series> getSeries() {
         return series;
     }
+    public Media getCurrentMedia() {
+        return currentMedia;
+    }
+
+    public void setCurrentMedia(Media currentMedia) {
+        this.currentMedia = currentMedia;
 
     public ArrayList<Playlist> getSavedPlaylists() {
         return savedPlaylists;
