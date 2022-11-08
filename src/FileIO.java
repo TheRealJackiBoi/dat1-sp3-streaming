@@ -67,7 +67,7 @@ public class FileIO {
         ArrayList<Playlist> hasSeenPlaylists = stream.getHasSeenPlaylists();
         ArrayList<Playlist> savedMediaData = stream.getSavedPlaylists();
         ArrayList<User> userData = new ArrayList<>();
-            for (String u: data) {
+        for (String u: data) {
                 String[] userLogin = u.split("; ");
 
                 String userName = userLogin[0];
@@ -90,13 +90,10 @@ public class FileIO {
                         userSaved = p.medias;
                     }
                 }
-
-
                 userData.add(new User(userName, userPassword, userHasSeen, userSaved));
             }
         return userData;
     }
-
 
     public static ArrayList<Playlist> setupPlaylist(File file) {
         List<String> mediaData = readData(file);
@@ -142,6 +139,27 @@ public class FileIO {
             playlists.add(p);
         }
         return playlists;
+    }
+
+    public static void createUser(String username, String password) {
+        Writer writer = null;
+        Streaming stream = Streaming.getInstance();
+        try {
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/users.txt", true), "UTF-8"));
+
+            User u = new User(username, password);
+            stream.addUser(u);
+
+            for (User user :
+                    stream.getUsers()) {
+                writer.write(user.getName() + "; " + user.getPassword() + "\n");
+            }
+            writer.close();
+        } catch (FileNotFoundException nfx) {
+            System.err.println(nfx);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
