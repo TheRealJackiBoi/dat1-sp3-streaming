@@ -4,9 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static java.awt.BorderLayout.*;
 import static java.awt.BorderLayout.CENTER;
@@ -30,7 +33,6 @@ public class StreamUI {
     private JPanel allMediaPanel;
     private JPanel allMoviesPanel;
     private JPanel allSeriesPanel;
-
 
     public JFrame createFrame() {
 
@@ -206,6 +208,11 @@ public class StreamUI {
             int a = JOptionPane.showConfirmDialog(frame, "Confirm you want to logout");
             if (a== JOptionPane.YES_OPTION) {
                 stream.setCurrentUser(null);
+                ArrayList<JPanel> allPanels = new ArrayList<>(Arrays.asList(loginPanel, mainPanel, savedTitlesPanel, hasWatchPanel));
+                for (JPanel p :
+                        allPanels) {
+                    p = null;
+                }
                 swapPanel(createLoginPanel());
             }
         });
