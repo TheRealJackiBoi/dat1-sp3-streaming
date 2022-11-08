@@ -27,6 +27,9 @@ public class StreamUI {
     private JPanel savedTitlesPanel;
     private JPanel hasWatchPanel;
     private JPanel playPanel;
+    private JPanel allMediaPanel;
+    private JPanel allMoviesPanel;
+    private JPanel allSeriesPanel;
 
 
     public JFrame createFrame() {
@@ -137,6 +140,11 @@ public class StreamUI {
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(welcomeText);
+        {
+            Font font = welcomeText.getFont();
+            font = font.deriveFont(font.getSize2D()*2);
+            welcomeText.setFont(font);
+        }
         panel.add(loginLabel);
         panel.add(userLabel);
         panel.add(userText);
@@ -164,6 +172,7 @@ public class StreamUI {
         JButton search = new JButton("Search");
         JButton savedTitles = new JButton("Saved Titles");
         JButton seenTitles = new JButton("Seen Titles");
+        JButton allMedia = new JButton("All Titles");
         JButton logout = new JButton("Logout");
 
         savedTitles.addActionListener(e -> {
@@ -186,6 +195,10 @@ public class StreamUI {
             swapPanel(createHasWatch());
         });
 
+        allMedia.addActionListener(e -> {
+            swapPanel(createAllMedia());
+        });
+
         logout.addActionListener(e -> {
 
             int a = JOptionPane.showConfirmDialog(frame, "Confirm you want to logout");
@@ -198,6 +211,7 @@ public class StreamUI {
         search.setAlignmentX(Component.CENTER_ALIGNMENT);
         savedTitles.setAlignmentX(Component.CENTER_ALIGNMENT);
         seenTitles.setAlignmentX(Component.CENTER_ALIGNMENT);
+        allMedia.setAlignmentX(Component.CENTER_ALIGNMENT);
         logout.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         topPanel.add(name);
@@ -206,6 +220,7 @@ public class StreamUI {
         panel.add(search);
         panel.add(savedTitles);
         panel.add(seenTitles);
+        panel.add(allMedia);
         panel.add(logout);
 
         mainPanel.setLayout(new BorderLayout());
@@ -399,6 +414,178 @@ public class StreamUI {
 
         return playPanel;
     }
+
+    private JPanel createAllMedia(){
+        if(allMediaPanel != null)
+            return allMediaPanel;
+
+        allMediaPanel = new JPanel(new BorderLayout());
+
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JButton bToMainMenu = new JButton("Main Menu");
+
+        JLabel allMedia = new JLabel("Select if you want to watch a Movie or Series!");
+
+        JPanel panel = new JPanel();
+
+        JButton movies = new JButton("Movies");
+
+        JButton series = new JButton("Series");
+
+        bToMainMenu.addActionListener(e -> {
+            swapPanel(createMainPanel());
+        });
+
+        movies.addActionListener(e -> {
+            swapPanel(createAllMoviesPanel());
+
+        });
+
+        series.addActionListener(e -> {
+            swapPanel(createAllSeriesPanel());
+        });
+
+
+        topPanel.add(bToMainMenu, Component.LEFT_ALIGNMENT);
+        allMedia.setHorizontalAlignment(JLabel.CENTER);
+        topPanel.add(allMedia);
+
+        panel.add(movies);
+        panel.add(series);
+
+
+        allMediaPanel.add(panel, CENTER);
+        allMediaPanel.add(topPanel, NORTH);
+
+        return allMediaPanel;
+    }
+
+    private JPanel createAllMoviesPanel(){
+        if (allMoviesPanel != null)
+            return allMoviesPanel;
+
+        allMoviesPanel= new JPanel();
+        Streaming stream = Streaming.getInstance();
+
+        JPanel panel = new JPanel(new BorderLayout());
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel contPanel = new JPanel();
+
+        JButton bGoToMain = new JButton("Menu");
+
+        JLabel allMovies = new JLabel("These are all our Movies!");
+
+                JList<Media> list = new JList<>(stream.getMovies().toArray(new Movie[0]));
+
+                JPanel bPanel = new JPanel(new GridLayout(1, 2));
+
+                JButton bPlay = new JButton("Play");
+
+                JScrollPane titlesSPanel = new JScrollPane(list);
+                titlesSPanel.setPreferredSize(new Dimension(300,500));
+
+                list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+                list.addListSelectionListener(e -> {
+                    boolean b = e.getFirstIndex() != -1;
+                    bPlay.setEnabled(b);
+
+                });
+
+                //gotomain add going to main menu panel
+                bGoToMain.addActionListener(e -> {
+                    //goto mainpanel
+                    swapPanel(createMainPanel());
+                });
+
+                bPlay.addActionListener(e -> {
+                    stream.setCurrentMedia(list.getSelectedValue());
+                    //goto playPanel
+                    swapPanel(createPlayPanel(list.getSelectedValue()));
+                });
+
+                bPlay.setEnabled(false);
+
+
+                contPanel.setLayout(new BorderLayout());
+
+                bPanel.add(bPlay);
+                topPanel.add(bGoToMain);
+                contPanel.add(allMovies, NORTH);
+                contPanel.add(titlesSPanel, CENTER);
+                contPanel.add(bPanel, SOUTH);
+                panel.add(topPanel, NORTH);
+                panel.add(contPanel, CENTER);
+
+                allMoviesPanel.add(panel, CENTER);
+
+                return allMoviesPanel;
+    }
+
+    private JPanel createAllSeriesPanel(){
+        if (allSeriesPanel != null)
+            return allSeriesPanel;
+
+        allSeriesPanel= new JPanel();
+        Streaming stream = Streaming.getInstance();
+
+        JPanel panel = new JPanel(new BorderLayout());
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel contPanel = new JPanel();
+
+        JButton bGoToMain = new JButton("Menu");
+
+        JLabel allSeries = new JLabel("These are all our Series!");
+
+        JList<Media> list = new JList<>(stream.getSeries().toArray(new Series[0]));
+
+        JPanel bPanel = new JPanel(new GridLayout(1, 2));
+
+        JButton bPlay = new JButton("Play");
+
+        JScrollPane titlesSPanel = new JScrollPane(list);
+        titlesSPanel.setPreferredSize(new Dimension(300,500));
+
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        list.addListSelectionListener(e -> {
+            boolean b = e.getFirstIndex() != -1;
+            bPlay.setEnabled(b);
+
+        });
+
+        //gotomain add going to main menu panel
+        bGoToMain.addActionListener(e -> {
+            //goto mainpanel
+            swapPanel(createMainPanel());
+        });
+
+        bPlay.addActionListener(e -> {
+            stream.setCurrentMedia(list.getSelectedValue());
+            //goto playPanel
+            swapPanel(createPlayPanel(list.getSelectedValue()));
+        });
+
+        bPlay.setEnabled(false);
+
+
+        contPanel.setLayout(new BorderLayout());
+
+        bPanel.add(bPlay);
+        topPanel.add(bGoToMain);
+        contPanel.add(allSeries, NORTH);
+        contPanel.add(titlesSPanel, CENTER);
+        contPanel.add(bPanel, SOUTH);
+        panel.add(topPanel, NORTH);
+        panel.add(contPanel, CENTER);
+
+        allSeriesPanel.add(panel, CENTER);
+
+        return allSeriesPanel;
+
+    }
+
+
 
     private void swapPanel(JPanel panel) {
         if (currentPanel != null) {
