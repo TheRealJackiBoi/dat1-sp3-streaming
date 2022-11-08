@@ -14,6 +14,13 @@ public class User {
         this.savedMedia = savedMedia;
     }
 
+    public User(String name, String password) {
+        this.name = name;
+        this.password = password;
+        this.hasSeen = new ArrayList<>();
+        this.savedMedia = new ArrayList<>();
+    }
+
     public void addToSavedMedia(Media media) {
 
     }

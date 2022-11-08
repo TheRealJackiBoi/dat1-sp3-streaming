@@ -94,4 +94,12 @@ public class Streaming {
     public ArrayList<Playlist> getHasSeenPlaylists() {
         return hasSeenPlaylists;
     }
+
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public void addUser(User u) {
+        users.add(u);
+    }
 }
