@@ -2,6 +2,8 @@ import javax.imageio.ImageIO;
 import javax.sound.midi.Soundbank;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.file.Files;
@@ -467,8 +469,24 @@ public class StreamUI {
 
 
         topPanel.add(bToMainMenu, Component.LEFT_ALIGNMENT);
-        allMedia.setHorizontalAlignment(JLabel.CENTER);
         topPanel.add(allMedia);
+
+        topPanel.addComponentListener(new ComponentListener() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                int xCordi = (topPanel.getWidth() - allMedia.getWidth())/2;
+                allMedia.setLocation(xCordi,allMedia.getY());
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {}
+
+            @Override
+            public void componentShown(ComponentEvent e) {}
+
+            @Override
+            public void componentHidden(ComponentEvent e) {}
+        });
 
         panel.add(movies);
         panel.add(series);
@@ -650,8 +668,6 @@ public class StreamUI {
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
 
-        JPanel seasonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-
         JButton bToMainMenu = new JButton("Main Menu");
 
         BufferedImage imageMedia;
@@ -663,31 +679,26 @@ public class StreamUI {
         JLabel mediaGenre = new JLabel(String.valueOf(stream.getCurrentMedia().getGenre()));
 
         JLabel mediaYear = new JLabel();
-        JLabel seriesSeason = new JLabel();
+        JLabel seriesSeason = null;
 
-        try {
-            Media media = stream.getCurrentMedia();
-            if (media instanceof Movie) {
-                mediaYear = new JLabel(String.valueOf((((Movie) media).getYear())));
-                mediaYear.setHorizontalAlignment(JLabel.CENTER);
-            } else if (media instanceof Series) {
-                mediaYear = new JLabel(String.valueOf(((Series) media).getYearStart()) + " - " + String.valueOf(((Series) media).getYearEnd()));
-                seriesSeason = new JLabel(String.valueOf(((Series) media).getSeasons()));
-                mediaYear.setHorizontalAlignment(JLabel.CENTER);
-                seriesSeason.setHorizontalAlignment(JLabel.CENTER);
-            }
-        } catch (Exception e){
-            System.out.println(e);
+        Media media = stream.getCurrentMedia();
+
+
+        if (media instanceof Movie) {
+            mediaYear = new JLabel(String.valueOf((((Movie) media).getYear())));
+            mediaYear.setHorizontalAlignment(JLabel.CENTER);
+        } else if (media instanceof Series) {
+            mediaYear = new JLabel(String.valueOf(((Series) media).getYearStart()) + " - " + String.valueOf(((Series) media).getYearEnd()));
+            seriesSeason = new JLabel(String.valueOf(((Series) media).getSeasons()));
+            mediaYear.setHorizontalAlignment(JLabel.CENTER);
+            seriesSeason.setHorizontalAlignment(JLabel.CENTER);
         }
-
 
         bToMainMenu.addActionListener(e -> {
             stream.setCurrentMedia(null);
             swapPanel(createMainPanel());
         });
 
-        try {
-            Media media = stream.getCurrentMedia();
 
             if (media instanceof Series) {
                 String imageName = "data/seriesImages/" + media.getName() + ".jpg";
@@ -697,14 +708,13 @@ public class StreamUI {
                 String imageName = "data/moviesImages/" + media.getName() + ".jpg";
                 imageLabel = new JLabel(new ImageIcon(imageName));
             }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+
 
         topPanel.add(bToMainMenu);
-        mediaName.setHorizontalAlignment(JLabel.CENTER);
-        mediaRating.setHorizontalAlignment(JLabel.CENTER);
-        mediaGenre.setHorizontalAlignment(JLabel.CENTER);
+
+            mediaName.setHorizontalAlignment(JLabel.CENTER);
+            mediaRating.setHorizontalAlignment(JLabel.CENTER);
+            mediaGenre.setHorizontalAlignment(JLabel.CENTER);
 
 
         {
@@ -714,14 +724,27 @@ public class StreamUI {
             mediaRating.setFont(font);
             mediaGenre.setFont(font);
             mediaYear.setFont(font);
+            if(seriesSeason != null)
             seriesSeason.setFont(font);
         }
 
-        infoPanel.add(mediaName);
-        infoPanel.add(mediaRating);
-        infoPanel.add(mediaGenre);
-        infoPanel.add(mediaYear);
-        infoPanel.add(seriesSeason);
+        {
+
+            infoPanel.add(Box.createVerticalGlue());
+
+            infoPanel.add(mediaName);
+            infoPanel.add(mediaRating);
+            infoPanel.add(mediaYear);
+            infoPanel.add(mediaGenre);
+            if(seriesSeason != null){
+                //TODO: make seasons appear beautyfully
+                infoPanel.add(seriesSeason);
+            }
+            infoPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 100));
+
+
+            infoPanel.add(Box.createVerticalGlue());
+        }
 
         viewMediaPanel.add(infoPanel, EAST);
         viewMediaPanel.add(imageLabel, CENTER);
@@ -729,8 +752,6 @@ public class StreamUI {
 
         return viewMediaPanel;
     }
-
-
 
     private void swapPanel(JPanel panel) {
         if (currentPanel != null) {
