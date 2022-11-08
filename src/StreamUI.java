@@ -30,6 +30,7 @@ public class StreamUI {
     private JPanel allMediaPanel;
     private JPanel allMoviesPanel;
     private JPanel allSeriesPanel;
+    private JPanel viewMediaPanel;
 
 
     public JFrame createFrame() {
@@ -253,6 +254,7 @@ public class StreamUI {
         JPanel bPanel = new JPanel(new GridLayout(1, 2));
 
         JButton bPlay = new JButton("Play");
+        JButton bViewMedia = new JButton("Details");
         JButton bDelete = new JButton("Delete");
 
 
@@ -279,6 +281,12 @@ public class StreamUI {
             swapPanel(createPlayPanel(list.getSelectedValue()));
         });
 
+        bViewMedia.addActionListener(e -> {
+            stream.setCurrentMedia(list.getSelectedValue());
+
+            swapPanel(createViewPanel());
+        });
+
         //TODO: Create delete from savedlist
         //delete media from savedList
         bDelete.addActionListener(e -> {
@@ -293,6 +301,7 @@ public class StreamUI {
 
         bPanel.add(bPlay);
         bPanel.add(bDelete);
+        bPanel.add(bViewMedia);
         topPanel.add(bGoToMain);
         contPanel.add(header, NORTH);
         contPanel.add(titlesSPanel, CENTER);
@@ -326,6 +335,8 @@ public class StreamUI {
 
         JButton bPlay = new JButton("Play");
 
+        JButton bViewMedia = new JButton("Details");
+
         JScrollPane titlesSPanel = new JScrollPane(list);
 
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -348,12 +359,19 @@ public class StreamUI {
             swapPanel(createPlayPanel(list.getSelectedValue()));
         });
 
+        bViewMedia.addActionListener(e -> {
+            stream.setCurrentMedia(list.getSelectedValue());
+
+            swapPanel(createViewPanel());
+        });
+
         bPlay.setEnabled(false);
 
 
         contPanel.setLayout(new BorderLayout());
 
         bPanel.add(bPlay);
+        bPanel.add(bViewMedia);
         topPanel.add(bGoToMain);
         contPanel.add(header, NORTH);
         contPanel.add(titlesSPanel, CENTER);
@@ -477,51 +495,68 @@ public class StreamUI {
 
         JLabel allMovies = new JLabel("These are all our Movies!");
 
-                JList<Media> list = new JList<>(stream.getMovies().toArray(new Movie[0]));
+        JList<Media> list = new JList<>(stream.getMovies().toArray(new Movie[0]));
 
-                JPanel bPanel = new JPanel(new GridLayout(1, 2));
+        JPanel bPanel = new JPanel(new GridLayout(1, 2));
 
-                JButton bPlay = new JButton("Play");
+        JButton bPlay = new JButton("Play");
 
-                JScrollPane titlesSPanel = new JScrollPane(list);
-                titlesSPanel.setPreferredSize(new Dimension(300,500));
+        JButton bSaveMedia = new JButton("Save Movie");
 
-                list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JButton bViewMedia = new JButton("Movie details");
 
-                list.addListSelectionListener(e -> {
-                    boolean b = e.getFirstIndex() != -1;
-                    bPlay.setEnabled(b);
+        JScrollPane titlesSPanel = new JScrollPane(list);
+        titlesSPanel.setPreferredSize(new Dimension(300,500));
 
-                });
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-                //gotomain add going to main menu panel
-                bGoToMain.addActionListener(e -> {
-                    //goto mainpanel
-                    swapPanel(createMainPanel());
-                });
+         list.addListSelectionListener(e -> {
+            boolean b = e.getFirstIndex() != -1;
+            bPlay.setEnabled(b);
 
-                bPlay.addActionListener(e -> {
-                    stream.setCurrentMedia(list.getSelectedValue());
-                    //goto playPanel
-                    swapPanel(createPlayPanel(list.getSelectedValue()));
-                });
+         });
 
-                bPlay.setEnabled(false);
+         //gotomain add going to main menu panel
+         bGoToMain.addActionListener(e -> {
+            //goto mainpanel
+            swapPanel(createMainPanel());
+         });
+
+         bPlay.addActionListener(e -> {
+             stream.setCurrentMedia(list.getSelectedValue());
+             //goto playPanel
+             swapPanel(createPlayPanel(list.getSelectedValue()));
+         });
+
+        bSaveMedia.addActionListener(e -> {
+            stream.setCurrentMedia(list.getSelectedValue());
+
+        });
+
+        bViewMedia.addActionListener(e -> {
+            stream.setCurrentMedia(list.getSelectedValue());
+
+            swapPanel(createViewPanel());
+        });
+
+        bPlay.setEnabled(false);
 
 
-                contPanel.setLayout(new BorderLayout());
+        contPanel.setLayout(new BorderLayout());
 
-                bPanel.add(bPlay);
-                topPanel.add(bGoToMain);
-                contPanel.add(allMovies, NORTH);
-                contPanel.add(titlesSPanel, CENTER);
-                contPanel.add(bPanel, SOUTH);
-                panel.add(topPanel, NORTH);
-                panel.add(contPanel, CENTER);
+        bPanel.add(bPlay);
+        bPanel.add(bSaveMedia);
+        bPanel.add(bViewMedia);
+        topPanel.add(bGoToMain);
+        contPanel.add(allMovies, NORTH);
+        contPanel.add(titlesSPanel, CENTER);
+        contPanel.add(bPanel, SOUTH);
+        panel.add(topPanel, NORTH);
+        panel.add(contPanel, CENTER);
 
-                allMoviesPanel.add(panel, CENTER);
+        allMoviesPanel.add(panel, CENTER);
 
-                return allMoviesPanel;
+        return allMoviesPanel;
     }
 
     private JPanel createAllSeriesPanel(){
@@ -544,6 +579,10 @@ public class StreamUI {
         JPanel bPanel = new JPanel(new GridLayout(1, 2));
 
         JButton bPlay = new JButton("Play");
+
+        JButton bSaveMedia = new JButton("Save Series");
+
+        JButton bViewMedia = new JButton("Series details");
 
         JScrollPane titlesSPanel = new JScrollPane(list);
         titlesSPanel.setPreferredSize(new Dimension(300,500));
@@ -568,12 +607,25 @@ public class StreamUI {
             swapPanel(createPlayPanel(list.getSelectedValue()));
         });
 
+        bSaveMedia.addActionListener(e -> {
+            stream.setCurrentMedia(list.getSelectedValue());
+
+        });
+
+        bViewMedia.addActionListener(e -> {
+            stream.setCurrentMedia(list.getSelectedValue());
+
+            swapPanel(createViewPanel());
+        });
+
         bPlay.setEnabled(false);
 
 
         contPanel.setLayout(new BorderLayout());
 
         bPanel.add(bPlay);
+        bPanel.add(bSaveMedia);
+        bPanel.add(bViewMedia);
         topPanel.add(bGoToMain);
         contPanel.add(allSeries, NORTH);
         contPanel.add(titlesSPanel, CENTER);
@@ -585,6 +637,97 @@ public class StreamUI {
 
         return allSeriesPanel;
 
+    }
+
+    private JPanel createViewPanel() {
+
+        viewMediaPanel = new JPanel(new BorderLayout());
+
+        Streaming stream = Streaming.getInstance();
+
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
+
+        JPanel seasonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+        JButton bToMainMenu = new JButton("Main Menu");
+
+        BufferedImage imageMedia;
+        JLabel imageLabel = new JLabel();
+
+        //get mediaName, mediaRating and mediasGenre
+        JLabel mediaName = new JLabel(stream.getCurrentMedia().getName());
+        JLabel mediaRating = new JLabel(String.valueOf(stream.getCurrentMedia().getRating()));
+        JLabel mediaGenre = new JLabel(String.valueOf(stream.getCurrentMedia().getGenre()));
+
+        JLabel mediaYear = new JLabel();
+        JLabel seriesSeason = new JLabel();
+
+        try {
+            Media media = stream.getCurrentMedia();
+            if (media instanceof Movie) {
+                mediaYear = new JLabel(String.valueOf((((Movie) media).getYear())));
+                mediaYear.setHorizontalAlignment(JLabel.CENTER);
+            } else if (media instanceof Series) {
+                mediaYear = new JLabel(String.valueOf(((Series) media).getYearStart()) + " - " + String.valueOf(((Series) media).getYearEnd()));
+                seriesSeason = new JLabel(String.valueOf(((Series) media).getSeasons()));
+                mediaYear.setHorizontalAlignment(JLabel.CENTER);
+                seriesSeason.setHorizontalAlignment(JLabel.CENTER);
+            }
+        } catch (Exception e){
+            System.out.println(e);
+        }
+
+
+        bToMainMenu.addActionListener(e -> {
+            stream.setCurrentMedia(null);
+            swapPanel(createMainPanel());
+        });
+
+        try {
+            Media media = stream.getCurrentMedia();
+
+            if (media instanceof Series) {
+                String imageName = "data/seriesImages/" + media.getName() + ".jpg";
+                imageLabel = new JLabel(new ImageIcon(imageName));
+
+            } else if (media instanceof Movie) {
+                String imageName = "data/moviesImages/" + media.getName() + ".jpg";
+                imageLabel = new JLabel(new ImageIcon(imageName));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        topPanel.add(bToMainMenu);
+        mediaName.setHorizontalAlignment(JLabel.CENTER);
+        mediaRating.setHorizontalAlignment(JLabel.CENTER);
+        mediaGenre.setHorizontalAlignment(JLabel.CENTER);
+
+
+        {
+            Font font = mediaName.getFont();
+            font = font.deriveFont(font.getSize2D()*2);
+            mediaName.setFont(font);
+            mediaRating.setFont(font);
+            mediaGenre.setFont(font);
+            mediaYear.setFont(font);
+            seriesSeason.setFont(font);
+        }
+
+        infoPanel.add(mediaName);
+        infoPanel.add(mediaRating);
+        infoPanel.add(mediaGenre);
+        infoPanel.add(mediaYear);
+        infoPanel.add(seriesSeason);
+
+        viewMediaPanel.add(infoPanel, EAST);
+        viewMediaPanel.add(imageLabel, CENTER);
+        viewMediaPanel.add(topPanel, NORTH);
+
+        return viewMediaPanel;
     }
 
 
