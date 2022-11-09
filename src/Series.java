@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Series extends Media {
     private final ArrayList<String> seasons;
+
     private final int yearStart;
     private final int yearEnd;
 
@@ -13,4 +14,15 @@ public class Series extends Media {
         this.yearEnd = yearEnd;
     }
 
+    public int getYearStart() {
+        return yearStart;
+    }
+
+    public int getYearEnd() {
+        return yearEnd;
+    }
+
+    public ArrayList<String> getSeasons() {
+        return seasons;
+    }
 }
