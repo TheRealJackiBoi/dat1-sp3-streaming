@@ -95,6 +95,16 @@ public class Streaming {
         return hasSeenPlaylists;
     }
 
+    public void addSavedPlaylists(Playlist p) {
+        savedPlaylists.add(p);
+        FileIO.updateSavedPlaylists();
+    }
+
+    public void addHasSeenPlaylists(Playlist p) {
+        hasSeenPlaylists.add(p);
+        FileIO.updateHasSeenPlaylists();
+    }
+
     public ArrayList<User> getUsers() {
         return users;
     }

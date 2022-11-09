@@ -81,6 +81,10 @@ public class FileIO {
                         userHasSeen = p.medias;
                     }
                 }
+                if (!userHasSeenExist) {
+                    stream.addHasSeenPlaylists(new Playlist(userName, new ArrayList<Media>()));
+                }
+
 
                 boolean savedMediaDataListExist = false;
                 ArrayList<Media> userSaved = new ArrayList<>();
@@ -89,6 +93,9 @@ public class FileIO {
                         savedMediaDataListExist = true;
                         userSaved = p.medias;
                     }
+                }
+                if(!savedMediaDataListExist) {
+                    stream.addSavedPlaylists(new Playlist(userName, new ArrayList<Media>()));
                 }
                 userData.add(new User(userName, userPassword, userHasSeen, userSaved));
             }
@@ -145,10 +152,13 @@ public class FileIO {
         Writer writer = null;
         Streaming stream = Streaming.getInstance();
         try {
-            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/users.txt", true), "UTF-8"));
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/users.txt", false), "UTF-8"));
 
             User u = new User(username, password);
             stream.addUser(u);
+
+            stream.addSavedPlaylists(new Playlist(username, new ArrayList<Media>()));
+            stream.addHasSeenPlaylists(new Playlist(username, new ArrayList<Media>()));
 
             for (User user :
                     stream.getUsers()) {
@@ -162,4 +172,51 @@ public class FileIO {
         }
     }
 
+
+    public static void updateSavedPlaylists() {
+        Writer writer = null;
+        Streaming stream = Streaming.getInstance();
+        try {
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/savedMedias.txt", false), "UTF-8"));
+
+
+            for (Playlist p :
+                    stream.getSavedPlaylists()) {
+                writePlaylistToFile(writer, p);
+            }
+            writer.close();
+        } catch (FileNotFoundException nfx) {
+            System.err.println(nfx);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void updateHasSeenPlaylists() {
+        Writer writer = null;
+        Streaming stream = Streaming.getInstance();
+        try {
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/watchedMedia.txt", false), "UTF-8"));
+            for (Playlist p :
+                    stream.getHasSeenPlaylists()) {
+                writePlaylistToFile(writer, p);
+            }
+            writer.close();
+        } catch (FileNotFoundException nfx) {
+            System.err.println(nfx);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static void writePlaylistToFile(Writer writer, Playlist p) throws IOException {
+        writer.write(p.ownerName + "; ");
+        for (int i = 0; i < p.medias.size(); i ++) {
+            if(i == 0)
+                writer.write(p.medias.get(i).getName());
+            else
+                writer.write(", " + p.medias.get(i).getName());
+        }
+        writer.write("\n");
+    }
 }

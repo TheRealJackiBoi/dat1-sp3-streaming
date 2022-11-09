@@ -6,9 +6,12 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static java.awt.BorderLayout.*;
 import static java.awt.BorderLayout.CENTER;
@@ -33,7 +36,6 @@ public class StreamUI {
     private JPanel allMoviesPanel;
     private JPanel allSeriesPanel;
     private JPanel viewMediaPanel;
-
 
     public JFrame createFrame() {
 
@@ -188,6 +190,7 @@ public class StreamUI {
             }
 
             //goto savedTitlesPane
+            savedTitlesPanel = null;
             swapPanel(createSavedTitlesPane());
         });
 
@@ -197,6 +200,7 @@ public class StreamUI {
                 return;
             }
 
+            hasWatchPanel = null;
             swapPanel(createHasWatch());
         });
 
@@ -209,6 +213,11 @@ public class StreamUI {
             int a = JOptionPane.showConfirmDialog(frame, "Confirm you want to logout");
             if (a== JOptionPane.YES_OPTION) {
                 stream.setCurrentUser(null);
+                ArrayList<JPanel> allPanels = new ArrayList<>(Arrays.asList(loginPanel, mainPanel, savedTitlesPanel, hasWatchPanel));
+                for (JPanel p :
+                        allPanels) {
+                    p = null;
+                }
                 swapPanel(createLoginPanel());
             }
         });
@@ -393,6 +402,8 @@ public class StreamUI {
 
         Streaming stream = Streaming.getInstance();
 
+        stream.getCurrentUser().watchMovie(streaming);
+
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         JButton bToMainMenu = new JButton("Main Menu");
@@ -517,7 +528,9 @@ public class StreamUI {
 
         JPanel bPanel = new JPanel(new GridLayout(1, 2));
 
-        JButton bPlay = new JButton("Play");
+
+                JButton bPlay = new JButton("Play");
+                JButton bSave = new JButton("Save");
 
         JButton bSaveMedia = new JButton("Save Movie");
 
@@ -525,6 +538,10 @@ public class StreamUI {
 
         JScrollPane titlesSPanel = new JScrollPane(list);
         titlesSPanel.setPreferredSize(new Dimension(300,500));
+                list.addListSelectionListener(e -> {
+                    boolean b = e.getFirstIndex() != -1;
+                    bPlay.setEnabled(b);
+                    bSave.setEnabled(b);
 
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -546,8 +563,20 @@ public class StreamUI {
              swapPanel(createPlayPanel(list.getSelectedValue()));
          });
 
-        bSaveMedia.addActionListener(e -> {
-            stream.setCurrentMedia(list.getSelectedValue());
+                bSave.addActionListener(e -> {
+                    Media m = list.getSelectedValue();
+                    stream.setCurrentMedia(list.getSelectedValue());
+                    boolean b = stream.getCurrentUser().addToSaved(m);
+
+                    if (!b) {
+                        JOptionPane.showMessageDialog(frame, "Media is already saved");
+                    } else {
+                        JOptionPane.showMessageDialog(frame, m + " is saved");
+                    }
+                });
+
+                bPlay.setEnabled(false);
+                bSave.setEnabled(false);
 
         });
 
@@ -565,6 +594,7 @@ public class StreamUI {
         bPanel.add(bPlay);
         bPanel.add(bSaveMedia);
         bPanel.add(bViewMedia);
+        bPanel.add(bSave);
         topPanel.add(bGoToMain);
         contPanel.add(allMovies, NORTH);
         contPanel.add(titlesSPanel, CENTER);
