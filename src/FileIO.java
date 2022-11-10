@@ -79,6 +79,7 @@ public class FileIO {
                     if (p.ownerName.equals(userName)) {
                         userHasSeenExist = true;
                         userHasSeen = p.medias;
+                        break;
                     }
                 }
                 if (!userHasSeenExist) {
@@ -92,6 +93,7 @@ public class FileIO {
                     if (p.ownerName.equals(userName)) {
                         savedMediaDataListExist = true;
                         userSaved = p.medias;
+                        break;
                     }
                 }
                 if(!savedMediaDataListExist) {

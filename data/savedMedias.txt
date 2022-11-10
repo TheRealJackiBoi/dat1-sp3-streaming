@@ -1,7 +1,5 @@
-Jack; 
+Jack; The Wizard Of Oz, Doctor Zhivago
 JackiBoi; 
 Tobias; 
-Julius; The Godfather part II
-Hans; 
-hans; Unforgiven, Raiders Of The Lost Ark
-jp; Raging Bull
+bjark; Gone With The Wind
+julie; Lawrence Of Arabia

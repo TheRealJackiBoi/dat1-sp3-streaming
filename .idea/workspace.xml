@@ -10,13 +10,6 @@
       <change beforePath="$PROJECT_DIR$/src/StreamUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StreamUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
     </list>
-    <list id="eb052d4e-a2db-4c87-b05d-b48991129ce5" name="Changes by UrinInF4CE" comment="">
-      <change beforePath="$PROJECT_DIR$/src/FileIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileIO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Playlist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Playlist.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StreamUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StreamUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Streaming.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Streaming.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
-    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,34 +17,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/StreamUI.java">
-      <ranges>
-        <range start1="135" end1="135" start2="135" end2="139" changelist="eb052d4e-a2db-4c87-b05d-b48991129ce5" />
-        <range start1="185" end1="186" start2="189" end2="189" changelist="5e010172-7737-4c0e-9bd6-6339e38cce3d" />
-        <range start1="570" end1="571" start2="573" end2="575" changelist="eb052d4e-a2db-4c87-b05d-b48991129ce5" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/User.java">
-      <ranges>
-        <range start1="31" end1="31" start2="31" end2="37" changelist="5e010172-7737-4c0e-9bd6-6339e38cce3d" />
-        <range start1="43" end1="43" start2="49" end2="55" changelist="5e010172-7737-4c0e-9bd6-6339e38cce3d" />
-        <range start1="54" end1="54" start2="66" end2="72" changelist="5e010172-7737-4c0e-9bd6-6339e38cce3d" />
-        <range start1="81" end1="81" start2="99" end2="103" changelist="eb052d4e-a2db-4c87-b05d-b48991129ce5" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/FileIO.java">
-      <ranges>
-        <range start1="81" end1="81" start2="81" end2="82" changelist="eb052d4e-a2db-4c87-b05d-b48991129ce5" />
-        <range start1="94" end1="94" start2="95" end2="96" changelist="eb052d4e-a2db-4c87-b05d-b48991129ce5" />
-        <range start1="113" end1="113" start2="115" end2="117" changelist="5e010172-7737-4c0e-9bd6-6339e38cce3d" />
-        <range start1="119" end1="120" start2="123" end2="125" changelist="5e010172-7737-4c0e-9bd6-6339e38cce3d" />
-        <range start1="121" end1="122" start2="126" end2="127" changelist="5e010172-7737-4c0e-9bd6-6339e38cce3d" />
-        <range start1="123" end1="124" start2="128" end2="129" changelist="5e010172-7737-4c0e-9bd6-6339e38cce3d" />
-        <range start1="125" end1="140" start2="130" end2="146" changelist="5e010172-7737-4c0e-9bd6-6339e38cce3d" />
-      </ranges>
-    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -100,9 +65,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1668080685757</updated>
-      <workItem from="1668080688681" duration="618000" />
+      <workItem from="1668080688681" duration="1318000" />
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="working">
+      <created>1668081548962</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1668081548962</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,6 +105,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="working" />
-    <option name="LAST_COMMIT_MESSAGE" value="working" />
+    <MESSAGE value="Changes by UrinInF4CE" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes by UrinInF4CE" />
   </component>
 </project>

@@ -114,6 +114,7 @@ public class StreamUI {
 
             FileIO.createUser(username, password);
             JOptionPane.showMessageDialog(frame, "You created user: " + username);
+            JOptionPane.showMessageDialog(frame, "Please restart to use new user");
 
         });
         //loginbutton action
@@ -549,6 +550,7 @@ public class StreamUI {
                     boolean b = e.getFirstIndex() != -1;
                     bPlay.setEnabled(b);
                     bSave.setEnabled(b);
+                    bViewMedia.setEnabled(b);
                 });
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -582,6 +584,8 @@ public class StreamUI {
         });
 
         bPlay.setEnabled(false);
+        bSave.setEnabled(false);
+        bViewMedia.setEnabled(false);
 
 
         contPanel.setLayout(new BorderLayout());
