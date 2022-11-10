@@ -1,17 +1,11 @@
-import javax.imageio.ImageIO;
-import javax.sound.midi.Soundbank;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.lang.reflect.Array;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static java.awt.BorderLayout.*;
 import static java.awt.BorderLayout.CENTER;
@@ -36,6 +30,7 @@ public class StreamUI {
     private JPanel allMoviesPanel;
     private JPanel allSeriesPanel;
     private JPanel viewMediaPanel;
+    private JPanel searchPanel;
 
     public JFrame createFrame() {
 
@@ -192,6 +187,10 @@ public class StreamUI {
             //goto savedTitlesPane
             savedTitlesPanel = null;
             swapPanel(createSavedTitlesPane());
+        });
+
+        search.addActionListener(e -> {
+            swapPanel(createSearchPanel());
         });
 
         seenTitles.addActionListener(e -> {
@@ -787,6 +786,178 @@ public class StreamUI {
         viewMediaPanel.add(topPanel, NORTH);
 
         return viewMediaPanel;
+    }
+
+    private JPanel createSearchPanel() {
+        if (searchPanel != null)
+            return searchPanel;
+
+
+        searchPanel= new JPanel();
+
+        Streaming stream = Streaming.getInstance();
+        AtomicReference<String> type = new AtomicReference<>("bMovies");
+
+        JPanel contentPanel = new JPanel();
+        JPanel showPanel = new JPanel();
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel mediaTypePanel = new JPanel();
+        JList<Media> list = new JList<>(stream.getMovies().toArray(new Movie[0]));
+        JScrollPane titlesSPanel = new JScrollPane(list);
+        JPanel bPanel = new JPanel();
+
+        mediaTypePanel.setLayout(new GridLayout(1,2));
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        searchPanel.setLayout(new BorderLayout());
+        showPanel.setLayout(new BoxLayout(showPanel, BoxLayout.Y_AXIS));
+        bPanel.setLayout(new GridLayout(1,3));
+
+        ArrayList<String> genres = new ArrayList<>(Arrays.asList("Please select a genre","Crime","Drama","Mystery","Action","Adventure",
+                "Thriller","Comedy","Fantasy","History","Animation","Sci fi","Biography","Family","Western",
+                "Documentary","Romance","Sport","War","Horror","Film noir","Musical"));
+
+        JComboBox genreSelect = new JComboBox(genres.toArray());
+        genreSelect.setSelectedIndex(0);
+
+        JButton bGoToMain = new JButton("Main Menu");
+        JButton bMovies = new JButton("Movies");
+        JButton bSeries = new JButton("Series");
+        JButton bSearch = new JButton("Search");
+        JButton bPlay = new JButton("Play");
+        JButton bSave = new JButton("Save");
+        JButton bViewMedia = new JButton("Details");
+
+        JLabel lName = new JLabel("Search for title");
+        JTextField name = new JTextField();
+
+        titlesSPanel.setPreferredSize(new Dimension(300,600));
+        name.setColumns(5);
+        lName.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bSearch.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+
+
+        list.addListSelectionListener(e -> {
+            boolean b = e.getFirstIndex() != -1;
+            bPlay.setEnabled(b);
+            bSave.setEnabled(b);
+            bViewMedia.setEnabled(b);
+        });
+
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        bGoToMain.addActionListener(e -> {
+            //goto mainpanel
+            swapPanel(createMainPanel());
+        });
+
+        bMovies.addActionListener(e -> {
+            type.set("bMovies");
+        });
+
+        bSeries.addActionListener(e -> {
+            type.set("bSeries");
+        });
+
+
+        bPlay.addActionListener(e -> {
+            stream.setCurrentMedia(list.getSelectedValue());
+            //goto playPanel
+            swapPanel(createPlayPanel(list.getSelectedValue()));
+        });
+
+        bSave.addActionListener(e -> {
+            Media m = list.getSelectedValue();
+            boolean b = stream.getCurrentUser().addToSaved(m);
+            if (!b) {
+                JOptionPane.showMessageDialog(frame, "Media is already saved");
+            } else {
+                JOptionPane.showMessageDialog(frame, m + " is saved");
+            }
+        });
+
+        bViewMedia.addActionListener(e -> {
+            stream.setCurrentMedia(list.getSelectedValue());
+
+            swapPanel(createViewPanel());
+        });
+
+        bSearch.addActionListener(e -> {
+            ArrayList<Movie> movies = stream.getMovies();
+            ArrayList<Series> series = stream.getSeries();
+            String mediaName = name.getText();
+            String genre = (String)genreSelect.getSelectedItem();
+            if (type.equals("movies")) {
+                ArrayList<Movie> medias = stream.getMovies();
+                if (!mediaName.equals("")) {
+                    for (Movie m : medias) {
+                        if (!mediaName.contains(m.getName())) {
+                            medias.remove(m);
+                        }
+                    }
+                }
+                if (!genre.equals("Please select a genre")) {
+                    for (Movie m : medias) {
+                        if (!m.getGenre().contains(genre)) {
+                            medias.remove(m);
+                        }
+                    }
+                }
+                list = new JList<>(medias.toArray(new Movie[0]));
+                titlesSPanel = new JScrollPane(list);
+                frame.revalidate();
+                frame.repaint();
+
+
+            } else {
+                ArrayList<Series> medias = stream.getSeries();
+                if (!mediaName.equals("")) {
+                    for (Series m : medias) {
+                        if (!mediaName.contains(m.getName())) {
+                            medias.remove(m);
+                        }
+                    }
+                }
+                if (!genre.equals("Please select a genre")) {
+                    for (Series m : medias) {
+                        if (!m.getGenre().contains(genre)) {
+                            medias.remove(m);
+                        }
+                    }
+                }
+                list = new JList<>(medias.toArray(new Series[0]));
+                titlesSPanel = new JScrollPane(list);
+                frame.revalidate();
+                frame.repaint();
+            }
+
+        });
+
+        bPlay.setEnabled(false);
+        bSave.setEnabled(false);
+        bViewMedia.setEnabled(false);
+
+        mediaTypePanel.add(bMovies);
+        mediaTypePanel.add(bSeries);
+        contentPanel.add(mediaTypePanel);
+        contentPanel.add(lName);
+        contentPanel.add(name);
+        contentPanel.add(genreSelect);
+        contentPanel.add(bSearch);
+        contentPanel.add(Box.createVerticalStrut(300));
+        bPanel.add(bPlay);
+        bPanel.add(bSave);
+        bPanel.add(bViewMedia);
+        showPanel.add(titlesSPanel);
+        showPanel.add(bPanel);
+        topPanel.add(bGoToMain);
+
+
+        searchPanel.add(topPanel, NORTH);
+        searchPanel.add(contentPanel, CENTER);
+        searchPanel.add(showPanel, EAST);
+
+        return searchPanel;
     }
 
     private void swapPanel(JPanel panel) {

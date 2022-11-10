@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e010172-7737-4c0e-9bd6-6339e38cce3d" name="Changes" comment="working">
+    <list default="true" id="5e010172-7737-4c0e-9bd6-6339e38cce3d" name="Changes" comment="Add createUser">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/savedMedias.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/savedMedias.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/users.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/watchedMedia.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/watchedMedia.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FileIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileIO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/StreamUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StreamUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Streaming.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Streaming.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,13 +28,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />

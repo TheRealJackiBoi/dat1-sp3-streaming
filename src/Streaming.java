@@ -1,6 +1,5 @@
 import java.io.File;
 import java.util.ArrayList;
-import java.util.stream.Stream;
 
 public class Streaming {
     private static Streaming stream = null;
@@ -79,6 +78,7 @@ public class Streaming {
     public ArrayList<Series> getSeries() {
         return series;
     }
+
     public Media getCurrentMedia() {
         return currentMedia;
     }
