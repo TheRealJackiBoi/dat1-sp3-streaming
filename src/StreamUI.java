@@ -277,6 +277,7 @@ public class StreamUI {
             boolean b = e.getFirstIndex() != -1;
             bPlay.setEnabled(b);
             bDelete.setEnabled(b);
+            bViewMedia.setEnabled(b);
         });
 
         //gotomain add going to main menu panel
@@ -298,14 +299,22 @@ public class StreamUI {
             swapPanel(createViewPanel());
         });
 
-        //TODO: Create delete from savedlist
         //delete media from savedList
         bDelete.addActionListener(e -> {
-
+            Media m = list.getSelectedValue();
+            boolean b = stream.getCurrentUser().removeFromSaved(m);
+            if (!b) {
+                JOptionPane.showMessageDialog(frame, "Media is already deleted");
+            } else {
+                JOptionPane.showMessageDialog(frame, m + " is deleted");
+            }
+            savedTitlesPanel = null;
+            swapPanel(createSavedTitlesPane());
         });
 
         bPlay.setEnabled(false);
         bDelete.setEnabled(false);
+        bViewMedia.setEnabled(false);
 
 
         contPanel.setLayout(new BorderLayout());
@@ -355,7 +364,7 @@ public class StreamUI {
         list.addListSelectionListener(e -> {
             boolean b = e.getFirstIndex() != -1;
             bPlay.setEnabled(b);
-
+            bViewMedia.setEnabled(b);
         });
 
         //gotomain add going to main menu panel
@@ -377,7 +386,7 @@ public class StreamUI {
         });
 
         bPlay.setEnabled(false);
-
+        bViewMedia.setEnabled(false);
 
         contPanel.setLayout(new BorderLayout());
 
@@ -529,27 +538,21 @@ public class StreamUI {
         JPanel bPanel = new JPanel(new GridLayout(1, 2));
 
 
-                JButton bPlay = new JButton("Play");
-                JButton bSave = new JButton("Save");
-
-        JButton bSaveMedia = new JButton("Save Movie");
+        JButton bPlay = new JButton("Play");
+        JButton bSave = new JButton("Save");
 
         JButton bViewMedia = new JButton("Movie details");
 
         JScrollPane titlesSPanel = new JScrollPane(list);
         titlesSPanel.setPreferredSize(new Dimension(300,500));
-                list.addListSelectionListener(e -> {
+
+        list.addListSelectionListener(e -> {
                     boolean b = e.getFirstIndex() != -1;
                     bPlay.setEnabled(b);
                     bSave.setEnabled(b);
-
+                });
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-         list.addListSelectionListener(e -> {
-            boolean b = e.getFirstIndex() != -1;
-            bPlay.setEnabled(b);
-
-         });
 
          //gotomain add going to main menu panel
          bGoToMain.addActionListener(e -> {
@@ -563,22 +566,15 @@ public class StreamUI {
              swapPanel(createPlayPanel(list.getSelectedValue()));
          });
 
-                bSave.addActionListener(e -> {
-                    Media m = list.getSelectedValue();
-                    stream.setCurrentMedia(list.getSelectedValue());
-                    boolean b = stream.getCurrentUser().addToSaved(m);
-
-                    if (!b) {
-                        JOptionPane.showMessageDialog(frame, "Media is already saved");
-                    } else {
-                        JOptionPane.showMessageDialog(frame, m + " is saved");
-                    }
+         bSave.addActionListener(e -> {
+             Media m = list.getSelectedValue();
+                boolean b = stream.getCurrentUser().addToSaved(m);
+                if (!b) {
+                    JOptionPane.showMessageDialog(frame, "Media is already saved");
+                } else {
+                    JOptionPane.showMessageDialog(frame, m + " is saved");
+                }
                 });
-
-                bPlay.setEnabled(false);
-                bSave.setEnabled(false);
-
-        });
 
         bViewMedia.addActionListener(e -> {
             stream.setCurrentMedia(list.getSelectedValue());
@@ -592,9 +588,8 @@ public class StreamUI {
         contPanel.setLayout(new BorderLayout());
 
         bPanel.add(bPlay);
-        bPanel.add(bSaveMedia);
-        bPanel.add(bViewMedia);
         bPanel.add(bSave);
+        bPanel.add(bViewMedia);
         topPanel.add(bGoToMain);
         contPanel.add(allMovies, NORTH);
         contPanel.add(titlesSPanel, CENTER);
@@ -627,8 +622,7 @@ public class StreamUI {
         JPanel bPanel = new JPanel(new GridLayout(1, 2));
 
         JButton bPlay = new JButton("Play");
-
-        JButton bSaveMedia = new JButton("Save Series");
+        JButton bSave = new JButton("Save");
 
         JButton bViewMedia = new JButton("Series details");
 
@@ -640,6 +634,8 @@ public class StreamUI {
         list.addListSelectionListener(e -> {
             boolean b = e.getFirstIndex() != -1;
             bPlay.setEnabled(b);
+            bSave.setEnabled(b);
+            bViewMedia.setEnabled(b);
 
         });
 
@@ -655,9 +651,14 @@ public class StreamUI {
             swapPanel(createPlayPanel(list.getSelectedValue()));
         });
 
-        bSaveMedia.addActionListener(e -> {
-            stream.setCurrentMedia(list.getSelectedValue());
-
+        bSave.addActionListener(e -> {
+            Media m = list.getSelectedValue();
+            boolean b = stream.getCurrentUser().addToSaved(m);
+            if (!b) {
+                JOptionPane.showMessageDialog(frame, "Media is already saved");
+            } else {
+                JOptionPane.showMessageDialog(frame, m + " is saved");
+            }
         });
 
         bViewMedia.addActionListener(e -> {
@@ -667,12 +668,14 @@ public class StreamUI {
         });
 
         bPlay.setEnabled(false);
+        bSave.setEnabled(false);
+        bViewMedia.setEnabled(false);
 
 
         contPanel.setLayout(new BorderLayout());
 
         bPanel.add(bPlay);
-        bPanel.add(bSaveMedia);
+        bPanel.add(bSave);
         bPanel.add(bViewMedia);
         topPanel.add(bGoToMain);
         contPanel.add(allSeries, NORTH);
