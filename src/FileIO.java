@@ -111,33 +111,37 @@ public class FileIO {
 
         for (String s :
                 mediaData) {
+            if (s.isBlank())
+                continue;
             String[] data = s.split(";");
 
             String ownerName = data[0].trim();
 
             ArrayList<Media> medias = new ArrayList<>();
 
-            String[] mediasRaw = data[1].trim().split(", ");
+            if (data.length > 1) {
+                String[] mediasRaw = data[1].trim().split(", ");
 
-            for (String mediaName : mediasRaw) {
+                for (String mediaName : mediasRaw) {
 
-                boolean mediaAdded = false;
+                    boolean mediaAdded = false;
 
-                for (Movie m :
-                        movies) {
-                    if (m.getName().equals(mediaName)) {
-                        medias.add(m);
-                        mediaAdded = true;
-                        break;
-                    }
-                }
-                if (!mediaAdded) {
-                    for (Series m :
-                            series) {
+                    for (Movie m :
+                            movies) {
                         if (m.getName().equals(mediaName)) {
                             medias.add(m);
                             mediaAdded = true;
                             break;
+                        }
+                    }
+                    if (!mediaAdded) {
+                        for (Series m :
+                                series) {
+                            if (m.getName().equals(mediaName)) {
+                                medias.add(m);
+                                mediaAdded = true;
+                                break;
+                            }
                         }
                     }
                 }

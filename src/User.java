@@ -29,6 +29,12 @@ public class User {
             return false;
 
         savedMedia.add(media);
+        for (Playlist p : Streaming.getInstance().getSavedPlaylists()) {
+            if (p.ownerName.equals(name)) {
+                p.setMedia(savedMedia);
+                break;
+            }
+        }
         FileIO.updateSavedPlaylists();
         return true;
     }
@@ -41,6 +47,12 @@ public class User {
             return false;
 
         savedMedia.remove(media);
+        for (Playlist p : Streaming.getInstance().getSavedPlaylists()) {
+            if (p.ownerName.equals(name)) {
+                p.setMedia(savedMedia);
+                break;
+            }
+        }
         FileIO.updateSavedPlaylists();
         return true;
     }
@@ -52,6 +64,12 @@ public class User {
             return;
 
         hasSeen.add(media);
+        for (Playlist p : Streaming.getInstance().getHasSeenPlaylists()) {
+            if (p.ownerName.equals(name)) {
+                p.setMedia(hasSeen);
+                break;
+            }
+        }
         FileIO.updateHasSeenPlaylists();
     }
 

@@ -183,7 +183,6 @@ public class StreamUI {
         JButton logout = new JButton("Logout");
 
         savedTitles.addActionListener(e -> {
-
             if (stream.getCurrentUser().getSavedMedia().isEmpty()) {
                 JOptionPane.showMessageDialog(frame, "You have no saved titles, save some first");
                 return;
