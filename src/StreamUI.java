@@ -31,6 +31,7 @@ public class StreamUI {
     private JPanel allSeriesPanel;
     private JPanel viewMediaPanel;
     private JPanel searchPanel;
+    SearchFilter searchFilter = new SearchFilter();
 
     public JFrame createFrame() {
 
@@ -789,20 +790,24 @@ public class StreamUI {
     }
 
     private JPanel createSearchPanel() {
+        searchFilter.genre = "";
+        searchFilter.name = "";
+        searchFilter.type = "movie";
+
         if (searchPanel != null)
             return searchPanel;
-
 
         searchPanel= new JPanel();
 
         Streaming stream = Streaming.getInstance();
-        AtomicReference<String> type = new AtomicReference<>("bMovies");
 
         JPanel contentPanel = new JPanel();
         JPanel showPanel = new JPanel();
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JPanel mediaTypePanel = new JPanel();
-        JList<Media> list = new JList<>(stream.getMovies().toArray(new Movie[0]));
+        final DefaultListModel<Media> listModel = new DefaultListModel<>();
+        listModel.addAll(stream.getMovies());
+        JList<Media> list = new JList<>(listModel);
         JScrollPane titlesSPanel = new JScrollPane(list);
         JPanel bPanel = new JPanel();
 
@@ -818,6 +823,16 @@ public class StreamUI {
 
         JComboBox genreSelect = new JComboBox(genres.toArray());
         genreSelect.setSelectedIndex(0);
+        ((JLabel)genreSelect.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
+
+        genreSelect.addItemListener(e -> {
+            String genre = (String)e.getItem();
+            if (!genres.get(0).equals(genre)){
+                searchFilter.genre = genre;
+            } else {
+                searchFilter.genre = "";
+            }
+        });
 
         JButton bGoToMain = new JButton("Main Menu");
         JButton bMovies = new JButton("Movies");
@@ -852,11 +867,11 @@ public class StreamUI {
         });
 
         bMovies.addActionListener(e -> {
-            type.set("bMovies");
+            searchFilter.type = "movie";
         });
 
         bSeries.addActionListener(e -> {
-            type.set("bSeries");
+            searchFilter.type = "series";
         });
 
 
@@ -883,54 +898,37 @@ public class StreamUI {
         });
 
         bSearch.addActionListener(e -> {
+            searchFilter.name = name.getText();
+
             ArrayList<Movie> movies = stream.getMovies();
             ArrayList<Series> series = stream.getSeries();
-            String mediaName = name.getText();
-            String genre = (String)genreSelect.getSelectedItem();
-            if (type.equals("movies")) {
-                ArrayList<Movie> medias = stream.getMovies();
-                if (!mediaName.equals("")) {
-                    for (Movie m : medias) {
-                        if (!mediaName.contains(m.getName())) {
-                            medias.remove(m);
-                        }
-                    }
-                }
-                if (!genre.equals("Please select a genre")) {
-                    for (Movie m : medias) {
-                        if (!m.getGenre().contains(genre)) {
-                            medias.remove(m);
-                        }
-                    }
-                }
-                list = new JList<>(medias.toArray(new Movie[0]));
-                titlesSPanel = new JScrollPane(list);
-                frame.revalidate();
-                frame.repaint();
 
+            ArrayList<Media> medias= new ArrayList<>();
 
+            if (searchFilter.type.equals("movie")) {
+                medias.addAll(stream.getMovies());
             } else {
-                ArrayList<Series> medias = stream.getSeries();
-                if (!mediaName.equals("")) {
-                    for (Series m : medias) {
-                        if (!mediaName.contains(m.getName())) {
-                            medias.remove(m);
-                        }
-                    }
-                }
-                if (!genre.equals("Please select a genre")) {
-                    for (Series m : medias) {
-                        if (!m.getGenre().contains(genre)) {
-                            medias.remove(m);
-                        }
-                    }
-                }
-                list = new JList<>(medias.toArray(new Series[0]));
-                titlesSPanel = new JScrollPane(list);
-                frame.revalidate();
-                frame.repaint();
+                medias.addAll(stream.getSeries());
             }
 
+            if (!searchFilter.name.isBlank()) {
+                for (int i = medias.size()-1; i >= 0 ; i--) {
+                    if (!medias.get(i).getName().contains(searchFilter.name)) {
+                        medias.remove(i);
+                    }
+                }
+            }
+
+            if (!searchFilter.genre.isEmpty()) {
+                for (int i = medias.size()-1; i >= 0 ; i--) {
+                    if (!medias.get(i).getGenre().contains(searchFilter.genre)) {
+                        medias.remove(i);
+                    }
+                }
+            }
+
+            listModel.clear();
+            listModel.addAll(medias);
         });
 
         bPlay.setEnabled(false);
@@ -967,6 +965,15 @@ public class StreamUI {
         frame.getContentPane().add(currentPanel = panel, CENTER);
         frame.revalidate();
         frame.repaint();
+    }
+
+    private static class SearchFilter {
+
+        public String type;
+        public String genre;
+        public String name;
+
+
     }
 
 }
