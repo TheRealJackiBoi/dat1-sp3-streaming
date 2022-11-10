@@ -3,46 +3,58 @@
 'https://plantuml.com/class-diagram
 
 class Main{
-
++static void Main (String[] args)
 }
 
 Main <|-- Streaming
 class Streaming{
--StreamUI ui
-+void setUpStream()
-+void goToMainPage()
-+void playMedia()
-}
+-static Streaming stream
+-currentUser User
+-currentMedia Media
+-ArrayList<User> users
+-ArrayList<Playlist> savedPlaylists
+-ArrayList<Playlist> hasSeenPlaylists
+-ArrayList<Movies> movies
+-ArrayList<Series> series
 
-StreamUI <|-- LoginPage
-class LoginPage{
-+ createUser()
++synchronized static streaming getInstance()
++boolean checkUserName(String)
++User checkUserPW(String, String)
++void setupStream()
++void addSavedPlaylists(Playlist)
++void addHasSeenPlaylists(Playlist)
++void addUser(User)
 
-}
-
-StreamUI <|-- MainPage
-class MainPage {
-+void logout()
-+void goToSearch()
-+void goToSavedTitles
-+void goToSeenTitles
-}
-
-StreamUI <|-- searchPage
-class searchPage{
-
-+Collection<Media> searchMedia(String name, String genre, int minYear, int maxYear, float minRating, float maxRating)
 }
 
 Streaming <|-- StreamUI
 class StreamUI {
+-JFrame frame
+-JPanel currentPanel
+-JPanel loginPanel
+-JPanel mainPanel
+-JPanel savedTitles
+-JPanel hasWatchPanel
+-JPanel playPanel
+-JPanel allMediaPanel
+-JPanel allMoviesPanel
+-JPanel allSeriesPanel
+-JPanel viewMediaPanel
+-JPanel searchPanel
+
 +JFrame createFrame()
 +JFrame getFrame()
 -JPanel createLoginPanel()
 -JPanel createMainPanel()
+-JPanel createSavedTitlesPane()
+-JPanel createHasWatch()
+-JPanel createPlayPanel()
+-JPanel createAllMedia()
+-JPanel createAllMoviesPanel()
+-JPanel createAllSeriesPanel()
+-JPanel createViewPanel()
 -JPanel createSearchPanel()
--JPanel createMediaPanel()
--JPanel createPlayingPanel()
+-void swapPanel(JPanel panel)
 }
 
 Streaming <|-- Media
@@ -56,30 +68,51 @@ abstract class Media {
 }
 
 class Movie extends Media {
-
+-final int year
 }
 
 class Series extends Media {
--ArrayList<String> seasons
+-final ArrayList<String> seasons
+-final int yearStart
+-final int yearEnd
+}
+abstract class Media {
+-final String name
+-final float rating
+-final ArrayList<String> genre
+
++toString()
 }
 
-
+Streaming <|-- FileIO
 class FileIO {
-+ArrayList<String> readFile(File path)
-+ArrayList<Movie> setupMovies()
-+ArrayList<Series> setupSeries()
++List<String> readData(File)
++ArrayList<Movie> setUpMovies()
++ArrayList<Series> setUpSeries()
++ArrayList<User> setUpUser()
++ArrayList<Playlist> setUpPlaylist(File)
++void createUser(String, String)
++void updateSavedPlaylists()
++void updateHasSeenPlaylists()
+-void writePlaylistsToFile(Writer, Playlist)
 }
 
+Streaming <|-- User
 class User {
 -String name
 -String password
--Collection hasSeen
--Collection savedMedia
+-ArrayList<Media> hasSeen
+-ArrayList<Media> savedMedia
 
-+void addToSavedMedia()
-+void revomeFromSaved()
++boolean addToSaved(Media)
++boolean removeFromSaved(Media)
++void watchMovie(Media)
+}
 
-+void watchMovie()
+User <|-- Playlist
+class Playlist {
++final String ownerName
++final ArrayList<Media> medias
 }
 
 
