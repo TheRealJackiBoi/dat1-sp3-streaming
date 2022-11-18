@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 
 public abstract class Media {
+
+    protected int id = 0;
     private final String name;
     private float rating;
     private final ArrayList<String> genre;
@@ -32,5 +34,7 @@ public abstract class Media {
         return name;
     }
 
-
+    public int getId() {
+        return id;
+    }
 }

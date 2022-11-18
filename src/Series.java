@@ -14,6 +14,14 @@ public class Series extends Media {
         this.yearEnd = yearEnd;
     }
 
+    public Series(int id, String name, float rating, ArrayList<String> genre, ArrayList<String> seasons, int yearStart, int yearEnd) {
+        super(name, rating, genre);
+        this.seasons = seasons;
+        this.yearStart = yearStart;
+        this.yearEnd = yearEnd;
+        this.id = id;
+    }
+
     public int getYearStart() {
         return yearStart;
     }
