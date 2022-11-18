@@ -7,6 +7,3 @@ Group members:
 &emsp;Bjarke Dehlie  
 &emsp;Jack Oulund  
 &emsp;Julius Lassen  
-  
-Trello link:  
-https://trello.com/b/uUZMWzru/dat1-sp3-streaming 
