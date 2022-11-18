@@ -15,4 +15,13 @@ public interface IO {
         return new ArrayList<User>();
     }
 
+    public static ArrayList<Playlist> setupPlaylist() {
+        return new ArrayList<Playlist>();
+    }
+
+    public static void createUser(String username, String password) {}
+
+    public static void updateSavedPlaylists() {}
+
+    public static void updateHasSeenPlaylists() {}
 }
