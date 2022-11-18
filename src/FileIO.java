@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class FileIO {
+public class FileIO implements IO {
 
     public static List<String> readData(File file){
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -14,7 +14,7 @@ public class FileIO {
     }
 
     public static ArrayList<Movie> setupMovies(){
-        List<String> data = readData(new File("data/movies.txt"));
+        List<String> data = readData(new File("data/movies.csv"));
         ArrayList<Movie> movies = new ArrayList<>();
         for (String s: data) {
             String[] values = s.split(";");
@@ -34,7 +34,7 @@ public class FileIO {
     }
 
     public static ArrayList<Series> setupSeries(){
-        List<String> data = readData(new File("data/series.txt"));
+        List<String> data = readData(new File("data/series.csv"));
         ArrayList<Series> series = new ArrayList<>();
         for (String s: data){
             String[] values = s.split(";");

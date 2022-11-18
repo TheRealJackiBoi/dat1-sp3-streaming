@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e010172-7737-4c0e-9bd6-6339e38cce3d" name="Changes" comment="work in progress">
+    <list default="true" id="5e010172-7737-4c0e-9bd6-6339e38cce3d" name="Changes" comment="WORKING NEARLY FINAL">
+      <change afterPath="$PROJECT_DIR$/data/series.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DBIO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/IO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StreamUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StreamUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/movies.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/movies.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/series.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FileIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileIO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="CodeStyleSettingsInfer">
-    <option name="done" value="true" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectCodeStyleSettingsMigration">
-    <option name="version" value="2" />
   </component>
   <component name="ProjectId" id="2HM2YlXril6cVR05EHCkbVKYRH6" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -33,14 +37,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "codeWithMe.voiceChat.enabledByDefault": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jack.DESKTOP-28B25H0/IdeaProjects/dat1-sp3-streamingservice&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -71,6 +76,9 @@
       <option name="presentableId" value="Default" />
       <updated>1668080685757</updated>
       <workItem from="1668080688681" duration="1318000" />
+      <workItem from="1668500735776" duration="68000" />
+      <workItem from="1668738539975" duration="98000" />
+      <workItem from="1668738649704" duration="5416000" />
     </task>
     <task id="LOCAL-00002" summary="working">
       <created>1668081548962</created>
@@ -79,14 +87,7 @@
       <option name="project" value="LOCAL" />
       <updated>1668081548962</updated>
     </task>
-    <task id="LOCAL-00003" summary="work in progress">
-      <created>1668092711393</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1668092711393</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -118,7 +119,6 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="working" />
     <MESSAGE value="Changes by UrinInF4CE" />
-    <MESSAGE value="work in progress" />
-    <option name="LAST_COMMIT_MESSAGE" value="work in progress" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes by UrinInF4CE" />
   </component>
 </project>
