@@ -265,23 +265,7 @@ public class DBIO implements IO {
 
                 String query = "UPDATE savedMedias SET medias = ? WHERE username = ?";
 
-                PreparedStatement statement = connection.prepareStatement(query);
-
-                String playlistRAW = "";
-
-                for (int i = 0; i < p.medias.size(); i ++) {
-                    if(i == 0)
-                        playlistRAW += p.medias.get(i).getName();
-                    else
-                        playlistRAW += ", " + p.medias.get(i).getName();
-                }
-
-                statement.setString(1, playlistRAW);
-                statement.setString(2, p.ownerName);
-
-                statement.execute();
-                statement.close();
-                connection.close();
+                updatePlaylistInDB(p, query);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -297,28 +281,32 @@ public class DBIO implements IO {
 
                 String query = "UPDATE hasSeen SET medias = ? WHERE username = ?";
 
-                PreparedStatement statement = connection.prepareStatement(query);
-
-                String playlistRAW = "";
-
-                for (int i = 0; i < p.medias.size(); i ++) {
-                    if(i == 0)
-                        playlistRAW += p.medias.get(i).getName();
-                    else
-                        playlistRAW += ", " + p.medias.get(i).getName();
-                }
-
-                statement.setString(1, playlistRAW);
-                statement.setString(2, p.ownerName);
-
-                statement.execute();
-
-                statement.close();
-                connection.close();
+                updatePlaylistInDB(p, query);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void updatePlaylistInDB(Playlist p, String query) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(query);
+
+        String playlistRAW = "";
+
+        for (int i = 0; i < p.medias.size(); i ++) {
+            if(i == 0)
+                playlistRAW += p.medias.get(i).getName();
+            else
+                playlistRAW += ", " + p.medias.get(i).getName();
+        }
+
+        statement.setString(1, playlistRAW);
+        statement.setString(2, p.ownerName);
+
+        statement.execute();
+
+        statement.close();
+        connection.close();
     }
 
 
