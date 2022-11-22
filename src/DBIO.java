@@ -30,7 +30,6 @@ public class DBIO implements IO {
         catch (Exception e) {
             e.printStackTrace();
         }
-        //System.out.println(arr);
 
         return arr;
     }
@@ -68,10 +67,8 @@ public class DBIO implements IO {
         catch (Exception e) {
             e.printStackTrace();
         }
-        //System.out.println(arr);
 
         return arr;
-
     }
 
 
@@ -170,6 +167,8 @@ public class DBIO implements IO {
         }
     }
 
+
+
     private static boolean checkUsername(String username){
 
         getConnection();
@@ -192,6 +191,68 @@ public class DBIO implements IO {
         }
 
         return false;
+    }
+
+
+    public static ArrayList<Playlist> setupPlaylist(String tableName) {
+        Streaming stream = Streaming.getInstance();
+        ArrayList<Movie> movies = stream.getMovies();
+        ArrayList<Series> series = stream.getSeries();
+
+        ArrayList<Playlist> playlists = new ArrayList<>();
+
+        try {
+            getConnection();
+            String query = "SELECT * FROM ?";
+
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, tableName);
+            statement.execute();
+
+            ResultSet rs = statement.getResultSet();
+
+            while (rs.next()) {
+
+                String ownerName = rs.getString(1);
+
+                ArrayList<Media> medias = new ArrayList<>();
+
+                if (rs.getString(2) == null) {
+                    String[] mediasRaw = rs.getString(2).trim().split(", ");
+
+                    for (String mediaName : mediasRaw) {
+
+                        boolean mediaAdded = false;
+
+                        for (Movie m :
+                                movies) {
+                            if (m.getName().equals(mediaName)) {
+                                medias.add(m);
+                                mediaAdded = true;
+                                break;
+                            }
+                        }
+                        if (!mediaAdded) {
+                            for (Series m :
+                                    series) {
+                                if (m.getName().equals(mediaName)) {
+                                    medias.add(m);
+                                    mediaAdded = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                Playlist p = new Playlist(ownerName, medias);
+                playlists.add(p);
+            }
+        }
+        catch (SQLException e) {
+
+        }
+
+        return playlists;
     }
 
     private static void getConnection() {

@@ -58,8 +58,10 @@ public class Streaming {
 
         movies = FileIO.setupMovies();
         series = FileIO.setupSeries();
-        savedPlaylists = FileIO.setupPlaylist(new File("data/savedMedias.txt"));
-        hasSeenPlaylists = FileIO.setupPlaylist(new File("data/watchedMedia.txt"));
+        //savedPlaylists = FileIO.setupPlaylist(new File("data/savedMedias.txt"));
+        savedPlaylists = DBIO.setupPlaylist("savedMedias");
+        //hasSeenPlaylists = FileIO.setupPlaylist(new File("data/watchedMedia.txt"));
+        hasSeenPlaylists = DBIO.setupPlaylist("hasSeen");
         users = FileIO.setUpUser();
     }
 

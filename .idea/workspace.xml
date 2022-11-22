@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e010172-7737-4c0e-9bd6-6339e38cce3d" name="Changes" comment="working on jdbc data extraction">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DBIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DBIO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Streaming.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Streaming.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
