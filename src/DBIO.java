@@ -97,6 +97,7 @@ public class DBIO implements IO {
                 String userName = rs.getString(1);
                 String userPassword = rs.getString(2);
 
+                //TODO Work in progress  HasSEENEXIST
                 boolean userHasSeenExist = false;
                 ArrayList<Media> userHasSeen = new ArrayList<>();
                 for (Playlist p : hasSeenPlaylists) {
@@ -110,7 +111,7 @@ public class DBIO implements IO {
                     stream.addHasSeenPlaylists(new Playlist(userName, new ArrayList<Media>()));
                 }
 
-
+                //TODO work in progress SavedMediaEXIST
                 boolean savedMediaDataListExist = false;
                 ArrayList<Media> userSaved = new ArrayList<>();
                 for (Playlist p : savedMediaData) {
