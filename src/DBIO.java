@@ -246,6 +246,7 @@ public class DBIO implements IO {
                 }
                 Playlist p = new Playlist(ownerName, medias);
                 playlists.add(p);
+                connection.close();
             }
         }
         catch (SQLException e) {
@@ -254,6 +255,72 @@ public class DBIO implements IO {
 
         return playlists;
     }
+
+    public static void updateSavedPlaylists() {
+        Streaming stream = Streaming.getInstance();
+
+        try {
+
+            for (Playlist p : stream.getSavedPlaylists()) {
+
+                String query = "UPDATE savedMedias SET medias = ? WHERE username = ?";
+
+                PreparedStatement statement = connection.prepareStatement(query);
+
+                String playlistRAW = "";
+
+                for (int i = 0; i < p.medias.size(); i ++) {
+                    if(i == 0)
+                        playlistRAW += p.medias.get(i).getName();
+                    else
+                        playlistRAW += ", " + p.medias.get(i).getName();
+                }
+
+                statement.setString(1, playlistRAW);
+                statement.setString(2, p.ownerName);
+
+                statement.execute();
+                statement.close();
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateHasSeenPlaylists() {
+        Streaming stream = Streaming.getInstance();
+
+        try {
+
+            for (Playlist p : stream.getHasSeenPlaylists()) {
+
+                String query = "UPDATE hasSeen SET medias = ? WHERE username = ?";
+
+                PreparedStatement statement = connection.prepareStatement(query);
+
+                String playlistRAW = "";
+
+                for (int i = 0; i < p.medias.size(); i ++) {
+                    if(i == 0)
+                        playlistRAW += p.medias.get(i).getName();
+                    else
+                        playlistRAW += ", " + p.medias.get(i).getName();
+                }
+
+                statement.setString(1, playlistRAW);
+                statement.setString(2, p.ownerName);
+
+                statement.execute();
+
+                statement.close();
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private static void getConnection() {
 
