@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.sql.*;
-//import static org.junit.Assert.assertTrue;
 
 public class DBIO implements IO {
 
@@ -126,15 +125,73 @@ public class DBIO implements IO {
                 }
                 userData.add(new User(userName, userPassword, userHasSeen, userSaved));
             }
+            statement.close();
+
+            connection.close();
         }
-        catch (Exception e){
+        catch (SQLException e){
             e.printStackTrace();
         }
 
         return userData;
     }
 
-    
+    public static void createUser(String username, String password) {
+
+        Streaming stream = Streaming.getInstance();
+
+        getConnection();
+        try {
+
+            if(checkUsername(username)){
+                String query = "INSERT INTO users (userName,password) VALUES (?,?)";
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setString(1,username);
+                statement.setString(2,password);
+
+                statement.execute(query);
+                ResultSet rs1 = statement.getResultSet();
+
+                statement.close();
+
+                connection.close();
+            }
+
+            User u = new User(username, password);
+            stream.addUser(u);
+
+            stream.addSavedPlaylists(new Playlist(username, new ArrayList<Media>()));
+            stream.addHasSeenPlaylists(new Playlist(username, new ArrayList<Media>()));
+
+
+        }  catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static boolean checkUsername(String username){
+
+        getConnection();
+        try {
+            String query = "SELECT * FROM users WHERE NOT EXISTS(SELECT userName FROM users where username = ?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            statement.setString(1, username);
+
+            statement.execute(query);
+            boolean rs = statement.getResultSet().getBoolean(1);
+
+            statement.close();
+            connection.close();
+
+            return rs;
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 
     private static void getConnection() {
 
