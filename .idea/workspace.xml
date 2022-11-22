@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e010172-7737-4c0e-9bd6-6339e38cce3d" name="Changes" comment="add updateplaylists">
+    <list default="true" id="5e010172-7737-4c0e-9bd6-6339e38cce3d" name="Changes" comment="add updateplaylistsInDB">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DBIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DBIO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -111,7 +112,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669154175532</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="add updateplaylistsInDB">
+      <created>1669154446821</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1669154446821</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,6 +154,7 @@
     <MESSAGE value="working setupMovies" />
     <MESSAGE value="add setupPlaylists" />
     <MESSAGE value="add updateplaylists" />
-    <option name="LAST_COMMIT_MESSAGE" value="add updateplaylists" />
+    <MESSAGE value="add updateplaylistsInDB" />
+    <option name="LAST_COMMIT_MESSAGE" value="add updateplaylistsInDB" />
   </component>
 </project>

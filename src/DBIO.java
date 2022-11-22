@@ -27,7 +27,7 @@ public class DBIO implements IO {
 
             connection.close();
         }
-        catch (Exception e) {
+        catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -64,7 +64,7 @@ public class DBIO implements IO {
 
             connection.close();
         }
-        catch (Exception e) {
+        catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -250,7 +250,7 @@ public class DBIO implements IO {
             }
         }
         catch (SQLException e) {
-
+            e.printStackTrace();
         }
 
         return playlists;
