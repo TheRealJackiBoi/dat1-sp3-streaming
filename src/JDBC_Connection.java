@@ -1,6 +1,6 @@
 import java.sql.*;
-import static org.junit.Assert.assertTrue;
-
+//import static org.junit.Assert.assertTrue;
+/*
 public class JDBC_Connection {
     public static void establishConnection() {
         Connection connection;
@@ -16,4 +16,4 @@ public class JDBC_Connection {
             e.printStackTrace();
         }
     }
-}
+}*/
