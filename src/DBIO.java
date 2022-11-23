@@ -90,11 +90,10 @@ public class DBIO implements IO {
 
             while (rs.next()) {
 
-                int userID = rs.getInt(0);
-                String userName = rs.getString(1);
-                String userPassword = rs.getString(2);
+                int userID = rs.getInt(1);
+                String userName = rs.getString(2);
+                String userPassword = rs.getString(3);
 
-                //TODO Work in progress  HasSEENEXIST
                 boolean userHasSeenExist = false;
                 ArrayList<Media> userHasSeen = new ArrayList<>();
                 for (Playlist p : hasSeenPlaylists) {
@@ -110,7 +109,6 @@ public class DBIO implements IO {
 
                 }
 
-                //TODO work in progress SavedMediaEXIST
                 boolean savedMediaDataListExist = false;
                 ArrayList<Media> userSaved = new ArrayList<>();
                 for (Playlist p : savedMediaData) {
@@ -143,10 +141,9 @@ public class DBIO implements IO {
         getConnection();
         try {
 
-            String query = "INSERT INTO ? (username, medias) VALUES (?, '')";
+            String query = "INSERT INTO " + tableName + " (username, medias) VALUES ('" + userName + "', '')";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, tableName);
-            statement.setString(2, userName);
+            //statement.setString(1, userName);
             statement.execute(query);
 
             statement.close();
@@ -161,20 +158,18 @@ public class DBIO implements IO {
 
         Streaming stream = Streaming.getInstance();
 
-        getConnection();
         try {
-
-            if(checkUsername(userName)){
-                String query = "INSERT INTO users (username,password) VALUES (?,?)";
-                PreparedStatement statement = connection.prepareStatement(query);
-                statement.setString(1,userName);
-                statement.setString(2,password);
+            if(!checkUsername(userName)){
+                getConnection();
+                String query = "INSERT INTO users (username,password) VALUES ('" + userName + "' ,'" + password + "')";
+                Statement statement = connection.createStatement();
 
                 statement.execute(query);
                 ResultSet rs1 = statement.getResultSet();
 
-                statement.close();
+                System.out.println(rs1);
 
+                statement.close();
                 connection.close();
             }
 
@@ -196,18 +191,19 @@ public class DBIO implements IO {
 
         getConnection();
         try {
-            String query = "SELECT * FROM users WHERE NOT EXISTS(SELECT userName FROM users where username = ?)";
-            PreparedStatement statement = connection.prepareStatement(query);
-
-            statement.setString(1, username);
+            String query = "SELECT username FROM users WHERE username= '" + username +"'";
+            Statement statement = connection.createStatement();
 
             statement.execute(query);
-            boolean rs = statement.getResultSet().getBoolean(1);
+
+            ResultSet rs = statement.getResultSet();
+
+            String s  = rs.first() ? rs.getString(1) : "";
 
             statement.close();
             connection.close();
 
-            return rs;
+            return s.equals(username);
         }
         catch (SQLException e){
             e.printStackTrace();
@@ -226,15 +222,13 @@ public class DBIO implements IO {
 
         try {
             getConnection();
-            String query = "SELECT * FROM ?";
+            String query = "SELECT * FROM " + tableName;
 
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, tableName);
-            statement.execute();
+            Statement statement = connection.createStatement();
+            statement.execute(query);
 
             ResultSet rs = statement.getResultSet();
-
-            while (rs.next()) {
+            while (!rs.isClosed() && rs.next()) {
 
                 String ownerName = rs.getString(1);
 
@@ -269,8 +263,9 @@ public class DBIO implements IO {
                 }
                 Playlist p = new Playlist(ownerName, medias);
                 playlists.add(p);
-                connection.close();
             }
+            connection.close();
+            rs.close();
         }
         catch (SQLException e) {
             e.printStackTrace();
@@ -286,9 +281,7 @@ public class DBIO implements IO {
 
             for (Playlist p : stream.getSavedPlaylists()) {
 
-                String query = "UPDATE savedMedias SET medias = ? WHERE username = ?";
-
-                updatePlaylistInDB(p, query);
+                updatePlaylistInDB(p, "savedMedias");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -302,17 +295,16 @@ public class DBIO implements IO {
 
             for (Playlist p : stream.getHasSeenPlaylists()) {
 
-                String query = "UPDATE hasSeen SET medias = ? WHERE username = ?";
-
-                updatePlaylistInDB(p, query);
+                updatePlaylistInDB(p, "hasSeen");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private static void updatePlaylistInDB(Playlist p, String query) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(query);
+    private static void updatePlaylistInDB(Playlist p, String tableName) throws SQLException {
+        getConnection();
+        Statement statement = connection.createStatement();
 
         String playlistRAW = "";
 
@@ -323,10 +315,9 @@ public class DBIO implements IO {
                 playlistRAW += ", " + p.medias.get(i).getName();
         }
 
-        statement.setString(1, playlistRAW);
-        statement.setString(2, p.ownerName);
+        String query = "UPDATE savedMedias SET medias = '" + playlistRAW + "' WHERE username = '" + p.ownerName + "'";
 
-        statement.execute();
+        statement.execute(query);
 
         statement.close();
         connection.close();
