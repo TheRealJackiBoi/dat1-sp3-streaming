@@ -108,7 +108,7 @@ public class StreamUI {
                 return;
             }
 
-            FileIO.createUser(username, password);
+            DBIO.createUser(username, password);
             JOptionPane.showMessageDialog(frame, "You created user: " + username);
             JOptionPane.showMessageDialog(frame, "Please restart to use new user");
 

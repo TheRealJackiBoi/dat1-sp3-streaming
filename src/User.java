@@ -29,7 +29,7 @@ public class User {
             return false;
 
         savedMedia.add(media);
-        FileIO.updateSavedPlaylists();
+        DBIO.updateSavedPlaylists();
         return true;
     }
 
@@ -41,7 +41,7 @@ public class User {
             return false;
 
         savedMedia.remove(media);
-        FileIO.updateSavedPlaylists();
+        DBIO.updateSavedPlaylists();
         return true;
     }
 
@@ -52,7 +52,7 @@ public class User {
             return;
 
         hasSeen.add(media);
-        FileIO.updateHasSeenPlaylists();
+        DBIO.updateHasSeenPlaylists();
     }
 
     public String getName() {

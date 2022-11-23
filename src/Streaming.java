@@ -56,13 +56,13 @@ public class Streaming {
 
     public void setUpStream(){
 
-        movies = FileIO.setupMovies();
-        series = FileIO.setupSeries();
+        movies = DBIO.setupMovies();
+        series = DBIO.setupSeries();
         //savedPlaylists = FileIO.setupPlaylist(new File("data/savedMedias.txt"));
         savedPlaylists = DBIO.setupPlaylist("savedMedias");
         //hasSeenPlaylists = FileIO.setupPlaylist(new File("data/watchedMedia.txt"));
         hasSeenPlaylists = DBIO.setupPlaylist("hasSeen");
-        users = FileIO.setUpUser();
+        users = DBIO.setUpUser();
     }
 
     public User getCurrentUser() {
@@ -101,10 +101,17 @@ public class Streaming {
         savedPlaylists.add(p);
         FileIO.updateSavedPlaylists();
     }
+    public void addSavedPlaylistsDB(Playlist p) {
+        savedPlaylists.add(p);
+    }
 
     public void addHasSeenPlaylists(Playlist p) {
         hasSeenPlaylists.add(p);
         FileIO.updateHasSeenPlaylists();
+    }
+
+    public void addHasSeenPlaylistsDB(Playlist p) {
+        hasSeenPlaylists.add(p);
     }
 
     public ArrayList<User> getUsers() {

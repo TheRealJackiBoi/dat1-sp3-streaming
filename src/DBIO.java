@@ -75,7 +75,7 @@ public class DBIO implements IO {
     public static ArrayList<User> setUpUser(){
         ArrayList<User> userData = new ArrayList<>();
 
-        String query = "SELECT * FROM user";
+        String query = "SELECT * FROM users";
 
         getConnection();
         try {
@@ -105,7 +105,9 @@ public class DBIO implements IO {
                     }
                 }
                 if (!userHasSeenExist) {
-                    stream.addHasSeenPlaylists(new Playlist(userName, new ArrayList<Media>()));
+                    stream.addHasSeenPlaylistsDB(new Playlist(userName, new ArrayList<Media>()));
+                    addNewPlaylistToTableDB("hasSeen", userName);
+
                 }
 
                 //TODO work in progress SavedMediaEXIST
@@ -119,7 +121,8 @@ public class DBIO implements IO {
                     }
                 }
                 if (!savedMediaDataListExist) {
-                    stream.addSavedPlaylists(new Playlist(userName, new ArrayList<Media>()));
+                    stream.addSavedPlaylistsDB(new Playlist(userName, new ArrayList<Media>()));
+                    addNewPlaylistToTableDB("savedMedias", userName);
                 }
                 userData.add(new User(userName, userPassword, userHasSeen, userSaved));
             }
@@ -134,17 +137,37 @@ public class DBIO implements IO {
         return userData;
     }
 
-    public static void createUser(String username, String password) {
+    public static void addNewPlaylistToTableDB(String tableName, String userName) {
+        Streaming stream = Streaming.getInstance();
+
+        getConnection();
+        try {
+
+            String query = "INSERT INTO ? (username, medias) VALUES (?, '')";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, tableName);
+            statement.setString(2, userName);
+            statement.execute(query);
+
+            statement.close();
+            connection.close();
+
+        }  catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void createUser(String userName, String password) {
 
         Streaming stream = Streaming.getInstance();
 
         getConnection();
         try {
 
-            if(checkUsername(username)){
-                String query = "INSERT INTO users (userName,password) VALUES (?,?)";
+            if(checkUsername(userName)){
+                String query = "INSERT INTO users (username,password) VALUES (?,?)";
                 PreparedStatement statement = connection.prepareStatement(query);
-                statement.setString(1,username);
+                statement.setString(1,userName);
                 statement.setString(2,password);
 
                 statement.execute(query);
@@ -155,11 +178,11 @@ public class DBIO implements IO {
                 connection.close();
             }
 
-            User u = new User(username, password);
+            User u = new User(userName, password);
             stream.addUser(u);
 
-            stream.addSavedPlaylists(new Playlist(username, new ArrayList<Media>()));
-            stream.addHasSeenPlaylists(new Playlist(username, new ArrayList<Media>()));
+            stream.addSavedPlaylistsDB(new Playlist(userName, new ArrayList<Media>()));
+            stream.addHasSeenPlaylistsDB(new Playlist(userName, new ArrayList<Media>()));
 
 
         }  catch (SQLException e) {
