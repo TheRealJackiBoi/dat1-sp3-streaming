@@ -30,7 +30,7 @@ public class DBIO implements IO {
         catch (SQLException e) {
             e.printStackTrace();
         }
-
+        System.out.println(arr);
         return arr;
     }
 
@@ -67,7 +67,7 @@ public class DBIO implements IO {
         catch (SQLException e) {
             e.printStackTrace();
         }
-
+        System.out.println(arr);
         return arr;
     }
 
@@ -218,6 +218,7 @@ public class DBIO implements IO {
         ArrayList<Movie> movies = stream.getMovies();
         ArrayList<Series> series = stream.getSeries();
 
+
         ArrayList<Playlist> playlists = new ArrayList<>();
 
         try {
@@ -229,12 +230,11 @@ public class DBIO implements IO {
 
             ResultSet rs = statement.getResultSet();
             while (!rs.isClosed() && rs.next()) {
-
                 String ownerName = rs.getString(1);
 
                 ArrayList<Media> medias = new ArrayList<>();
 
-                if (rs.getString(2) == null) {
+                if (!rs.getString(2).equals("")) {
                     String[] mediasRaw = rs.getString(2).trim().split(", ");
 
                     for (String mediaName : mediasRaw) {
@@ -274,48 +274,55 @@ public class DBIO implements IO {
         return playlists;
     }
 
-    public static void updateSavedPlaylists() {
+    public static void updateSavedPlaylists(User user) {
         Streaming stream = Streaming.getInstance();
 
         try {
+            updatePlaylistInDB(user, "savedMedias");
 
-            for (Playlist p : stream.getSavedPlaylists()) {
-
-                updatePlaylistInDB(p, "savedMedias");
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public static void updateHasSeenPlaylists() {
+    public static void updateHasSeenPlaylists(User user) {
         Streaming stream = Streaming.getInstance();
 
         try {
+            updatePlaylistInDB(user, "hasSeen");
 
-            for (Playlist p : stream.getHasSeenPlaylists()) {
-
-                updatePlaylistInDB(p, "hasSeen");
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private static void updatePlaylistInDB(Playlist p, String tableName) throws SQLException {
+    private static void updatePlaylistInDB(User user, String tableName) throws SQLException {
         getConnection();
         Statement statement = connection.createStatement();
 
         String playlistRAW = "";
 
-        for (int i = 0; i < p.medias.size(); i ++) {
-            if(i == 0)
-                playlistRAW += p.medias.get(i).getName();
-            else
-                playlistRAW += ", " + p.medias.get(i).getName();
+        if (tableName.equals("savedMedias")) {
+            if (user.getSavedMedia().size() > 0) {
+                for (int i = 0; i < user.getSavedMedia().size(); i++) {
+                    if (i == 0)
+                        playlistRAW += user.getSavedMedia().get(i).getName();
+                    else
+                        playlistRAW += ", " + user.getSavedMedia().get(i).getName();
+                }
+            }
         }
-
-        String query = "UPDATE savedMedias SET medias = '" + playlistRAW + "' WHERE username = '" + p.ownerName + "'";
+        else {
+            if (user.getSavedMedia().size() > 0) {
+                for (int i = 0; i < user.getHasSeen().size(); i++) {
+                    if (i == 0)
+                        playlistRAW += user.getHasSeen().get(i).getName();
+                    else
+                        playlistRAW += ", " + user.getHasSeen().get(i).getName();
+                }
+            }
+        }
+        String query = "UPDATE " + tableName + " SET medias = '" + playlistRAW + "' WHERE username = '" + user.getName() + "'";
 
         statement.execute(query);
 

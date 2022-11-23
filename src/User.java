@@ -22,14 +22,19 @@ public class User {
     }
 
     public boolean addToSaved(Media media) {
-
+        Streaming stream = Streaming.getInstance();
         int index = savedMedia.indexOf(media);
 
         if(index != -1)
             return false;
 
+
+        //int i = stream.getSavedPlaylists().indexOf(new Playlist(name, savedMedia));
+
         savedMedia.add(media);
-        DBIO.updateSavedPlaylists();
+        //stream.getSavedPlaylists().get(i).medias.add(media);
+
+        DBIO.updateSavedPlaylists(this);
         return true;
     }
 
@@ -41,7 +46,7 @@ public class User {
             return false;
 
         savedMedia.remove(media);
-        DBIO.updateSavedPlaylists();
+        DBIO.updateSavedPlaylists(this);
         return true;
     }
 
@@ -52,7 +57,7 @@ public class User {
             return;
 
         hasSeen.add(media);
-        DBIO.updateHasSeenPlaylists();
+        DBIO.updateHasSeenPlaylists(this);
     }
 
     public String getName() {

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e010172-7737-4c0e-9bd6-6339e38cce3d" name="Changes" comment="update Maybelasts">
+    <list default="true" id="5e010172-7737-4c0e-9bd6-6339e38cce3d" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DBIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DBIO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JDBC_Connection.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +89,7 @@
       <workItem from="1668500735776" duration="68000" />
       <workItem from="1668738539975" duration="98000" />
       <workItem from="1668738649704" duration="5416000" />
-      <workItem from="1669231256272" duration="9000000" />
+      <workItem from="1669231256272" duration="12409000" />
     </task>
     <task id="LOCAL-00002" summary="working">
       <created>1668081548962</created>
@@ -140,7 +140,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669233572684</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="update">
+      <created>1669240356015</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1669240356015</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,6 +185,7 @@
     <MESSAGE value="add updateplaylistsInDB" />
     <MESSAGE value="update exceptions" />
     <MESSAGE value="update Maybelasts" />
-    <option name="LAST_COMMIT_MESSAGE" value="update Maybelasts" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
 </project>
