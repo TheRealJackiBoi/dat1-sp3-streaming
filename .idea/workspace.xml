@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e010172-7737-4c0e-9bd6-6339e38cce3d" name="Changes" comment="nearly final">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/savedMedias.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/savedMedias.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/watchedMedia.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/watchedMedia.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StreamUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StreamUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Streaming.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Streaming.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
-    </list>
+    <list default="true" id="5e010172-7737-4c0e-9bd6-6339e38cce3d" name="Changes" comment="working FINAL" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,7 +87,7 @@
       <workItem from="1668738649704" duration="5416000" />
       <workItem from="1669231256272" duration="12526000" />
       <workItem from="1669247118128" duration="1282000" />
-      <workItem from="1669291135655" duration="2459000" />
+      <workItem from="1669291135655" duration="2791000" />
     </task>
     <task id="LOCAL-00002" summary="working">
       <created>1668081548962</created>
@@ -159,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669243826090</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="working FINAL">
+      <created>1669293799337</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1669293799337</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -199,6 +199,7 @@
     <MESSAGE value="update Maybelasts" />
     <MESSAGE value="update" />
     <MESSAGE value="nearly final" />
-    <option name="LAST_COMMIT_MESSAGE" value="nearly final" />
+    <MESSAGE value="working FINAL" />
+    <option name="LAST_COMMIT_MESSAGE" value="working FINAL" />
   </component>
 </project>
