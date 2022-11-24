@@ -107,8 +107,12 @@ public class StreamUI {
                 JOptionPane.showMessageDialog(frame,"User already exists");
                 return;
             }
-
-            DBIO.createUser(username, password);
+            if (stream.ioType == 'd') {
+                DBIO.createUser(username, password);
+            }
+            else {
+                FileIO.createUser(username, password);
+            }
             JOptionPane.showMessageDialog(frame, "You created user: " + username);
             JOptionPane.showMessageDialog(frame, "Please restart to use new user");
 
@@ -431,11 +435,15 @@ public class StreamUI {
         try{
             Media media = stream.getCurrentMedia();
 
+            String mName = media.getName();
+            if (mName.contains("'")) {
+                mName = mName.replaceAll("'", "_");
+            }
             if (media instanceof Series) {
-                String imageName = "data/seriesImages/" + media.getName() +".jpg";
+                String imageName = "data/seriesImages/" + mName +".jpg";
                 imageLabel = new JLabel(new ImageIcon(imageName));
             } else if (media instanceof Movie) {
-                String imageName = "data/moviesImages/" + media.getName() + ".jpg";
+                String imageName = "data/moviesImages/" + mName + ".jpg";
                 imageLabel = new JLabel(new ImageIcon(imageName));
             }
         } catch (Exception e){

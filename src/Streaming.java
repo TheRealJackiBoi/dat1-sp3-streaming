@@ -12,6 +12,7 @@ public class Streaming {
     }
 
     private Streaming() {}
+    public char ioType = 'd';
     private ArrayList<User> users;
     private User currentUser;
     private Media currentMedia;
@@ -55,14 +56,19 @@ public class Streaming {
     }
 
     public void setUpStream(){
-
-        movies = DBIO.setupMovies();
-        series = DBIO.setupSeries();
-        //savedPlaylists = FileIO.setupPlaylist(new File("data/savedMedias.txt"));
-        savedPlaylists = DBIO.setupPlaylist("savedMedias");
-        //hasSeenPlaylists = FileIO.setupPlaylist(new File("data/watchedMedia.txt"));
-        hasSeenPlaylists = DBIO.setupPlaylist("hasSeen");
-        users = DBIO.setUpUser();
+        if (ioType == 'd') {
+            movies = DBIO.setupMovies();
+            series = DBIO.setupSeries();
+            savedPlaylists = DBIO.setupPlaylist("savedMedias");
+            hasSeenPlaylists = DBIO.setupPlaylist("hasSeen");
+            users = DBIO.setUpUser();
+        } else {
+            movies = FileIO.setupMovies();
+            series = FileIO.setupSeries();
+            savedPlaylists = FileIO.setupPlaylist(new File("data/savedMedias.txt"));
+            hasSeenPlaylists = FileIO.setupPlaylist(new File("data/watchedMedia.txt"));
+            users = FileIO.setUpUser();
+        }
     }
 
     public User getCurrentUser() {
