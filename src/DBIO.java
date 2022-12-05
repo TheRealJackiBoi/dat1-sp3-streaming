@@ -334,9 +334,9 @@ public class DBIO implements IO {
     private static void getConnection() {
 
         try {
-            String url = "jdbc:mysql://mysql24.unoeuro.com:3306/cudia_dk_db?" + "autoReconnect=true&useSSL=false"; // your SQL database IP
-            String username = "cudia_dk"; // your SQL username
-            String password = "mEy6xwhn2gczftDkerba"; // your SQL password
+            String url = "jdbc:mysql://?" + "autoReconnect=true&useSSL=false"; // your SQL database IP
+            String username = ""; // your SQL username
+            String password = ""; // your SQL password
 
             connection = DriverManager.getConnection(url, username, password);
         }
